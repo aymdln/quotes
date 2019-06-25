@@ -13,7 +13,7 @@ class CreateProfils < ActiveRecord::Migration[5.2]
       t.string :siret
       t.string :siren
       t.string :phone
-      t.integer :type
+      t.integer :third_party_type
     
       t.timestamps
     end

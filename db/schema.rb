@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_06_24_154556) do
     t.string "siret"
     t.string "siren"
     t.string "phone"
-    t.integer "type"
+    t.integer "third_party_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
