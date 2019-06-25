@@ -27,14 +27,7 @@ ActiveRecord::Schema.define(version: 2019_06_24_154556) do
     t.string "siret"
     t.string "siren"
     t.string "phone"
-    t.bigint "third_party_types_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["third_party_types_id"], name: "index_third_parties_on_third_party_types_id"
-  end
-
-  create_table "third_party_types", force: :cascade do |t|
-    t.string "name"
+    t.integer "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,6 +48,5 @@ ActiveRecord::Schema.define(version: 2019_06_24_154556) do
     t.index ["third_party_id"], name: "index_users_on_third_party_id"
   end
 
-  add_foreign_key "third_parties", "third_party_types", column: "third_party_types_id"
   add_foreign_key "users", "third_parties"
 end

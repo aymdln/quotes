@@ -1,11 +1,5 @@
 class CreateProfils < ActiveRecord::Migration[5.2]
   def change
-
-    create_table :third_party_types do |t|
-      t.string :name
-    
-      t.timestamps
-    end
     
     create_table :third_parties do |t|
       t.string :name
@@ -19,7 +13,7 @@ class CreateProfils < ActiveRecord::Migration[5.2]
       t.string :siret
       t.string :siren
       t.string :phone
-      t.references :third_party_types, foreign_key: true
+      t.integer :type
     
       t.timestamps
     end
