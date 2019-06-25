@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_06_24_154556) do
     t.string "city"
     t.string "zip"
     t.string "country"
-    t.string "mail"
+    t.string "email"
     t.string "web"
     t.string "tva"
     t.string "siret"
