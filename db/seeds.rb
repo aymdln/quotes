@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "----------Clearing DB... 🧨 ----------"
+print "==> #{ThirdParty.name.colorize(:blue)}"
+ThirdParty.destroy_all
+puts ' [CLEAR]'.colorize(:green)
+print "==> #{User.name.colorize(:blue)}"
+User.destroy_all
+puts ' [CLEAR]'.colorize(:green)
+puts '----------Finish-----------'
