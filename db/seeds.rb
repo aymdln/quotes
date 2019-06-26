@@ -84,4 +84,11 @@ clients = Array.new
     third_party_id: thirdParty.id
   )
   puts "[CREATE]".colorize(:green)
+  
+  puts
 end
+
+  puts "---------Create ThirdParty & User End client 👤----------"
+  
+	
+	
