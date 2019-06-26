@@ -45,7 +45,7 @@ User.create(
   password: Faker::Internet.password,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  third_party_id: nouvelEr.id
+  third_party_id: nouvelEr.id,
 )
 puts "[CREATE]".colorize(:green)
 
@@ -81,14 +81,42 @@ clients = Array.new
     password: Faker::Internet.password,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    third_party_id: thirdParty.id
+    third_party_id: thirdParty.id,
   )
   puts "[CREATE]".colorize(:green)
-  
-  puts
 end
 
-  puts "---------Create ThirdParty & User End client 👤----------"
-  
-	
-	
+puts
+
+puts "---------Create ThirdParty & User End client 👤----------"
+
+9.times do |n|
+  name = "End Client #{n += 1}"
+  puts "==> #{name.colorize(:magenta)}"
+  print "ThirdParty "
+  email = Faker::Internet.email
+  thirdParty = ThirdParty.create(
+    name: name,
+    address: Faker::Address.street_address,
+    city: Faker::Address.city,
+    zip: Faker::Address.zip,
+    country: Faker::Address.country,
+    email: email,
+    web: Faker::Internet.domain_name,
+    tva: "FR50492544317",
+    siret: Faker::Company.french_siret_number,
+    siren: Faker::Company.french_siren_number,
+    phone: Faker::PhoneNumber.phone_number,
+    third_party_type: 2,
+  )
+  puts "[CREATE]".colorize(:green)
+  print "User "
+  User.create(
+    email: email,
+    password: Faker::Internet.password,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    third_party_id: thirdParty.id,
+  )
+  puts "[CREATE]".colorize(:green)
+end
