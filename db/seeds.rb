@@ -52,7 +52,7 @@ puts "[CREATE]".colorize(:green)
 puts
 puts
 
-puts "----------Create ThirdParty & User client 🛠-------------"
+puts "----------Create ThirdParty, User & Relation for client 🛠-------------"
 
 clients = Array.new
 3.times do |n|
@@ -82,6 +82,12 @@ clients = Array.new
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     third_party_id: thirdParty.id,
+  )
+  puts "[CREATE]".colorize(:green)
+  print "Relation "
+  Relation.create(
+    manufacturer_id: nouvelEr.id,
+    client_id: thirdParty.id
   )
   puts "[CREATE]".colorize(:green)
 end
