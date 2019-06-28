@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_26_173700) do
+ActiveRecord::Schema.define(version: 2019_06_27_144747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "products", force: :cascade do |t|
+    t.bigint "third_party_id"
+    t.integer "category"
+    t.float "basic_coef"
+    t.index ["third_party_id"], name: "index_products_on_third_party_id"
+  end
+
+  create_table "relation_product_coefs", force: :cascade do |t|
+    t.bigint "relation_id"
+    t.bigint "product_id"
+    t.float "coef"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_relation_product_coefs_on_product_id"
+    t.index ["relation_id"], name: "index_relation_product_coefs_on_relation_id"
+  end
 
   create_table "relations", force: :cascade do |t|
     t.bigint "manufacturer_id"
@@ -57,6 +74,9 @@ ActiveRecord::Schema.define(version: 2019_06_26_173700) do
     t.index ["third_party_id"], name: "index_users_on_third_party_id"
   end
 
+  add_foreign_key "products", "third_parties"
+  add_foreign_key "relation_product_coefs", "products"
+  add_foreign_key "relation_product_coefs", "relations"
   add_foreign_key "relations", "third_parties", column: "client_id"
   add_foreign_key "relations", "third_parties", column: "manufacturer_id"
   add_foreign_key "users", "third_parties"
