@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_01_123113) do
+ActiveRecord::Schema.define(version: 2019_07_02_130611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,17 @@ ActiveRecord::Schema.define(version: 2019_07_01_123113) do
     t.bigint "third_party_id"
     t.integer "category"
     t.float "basic_coef"
+    t.string "name"
     t.index ["third_party_id"], name: "index_products_on_third_party_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.float "value"
+    t.string "ref"
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_properties_on_product_id"
   end
 
   create_table "quote_products", force: :cascade do |t|
@@ -92,6 +102,7 @@ ActiveRecord::Schema.define(version: 2019_07_01_123113) do
   end
 
   add_foreign_key "products", "third_parties"
+  add_foreign_key "properties", "products"
   add_foreign_key "quote_products", "products"
   add_foreign_key "quote_products", "quotes"
   add_foreign_key "quotes", "relations"
