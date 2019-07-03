@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_27_144747) do
+ActiveRecord::Schema.define(version: 2019_07_02_130611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,34 @@ ActiveRecord::Schema.define(version: 2019_06_27_144747) do
     t.bigint "third_party_id"
     t.integer "category"
     t.float "basic_coef"
+    t.string "name"
     t.index ["third_party_id"], name: "index_products_on_third_party_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.float "value"
+    t.string "ref"
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_properties_on_product_id"
+  end
+
+  create_table "quote_products", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "quote_id"
+    t.index ["product_id"], name: "index_quote_products_on_product_id"
+    t.index ["quote_id"], name: "index_quote_products_on_quote_id"
+  end
+
+  create_table "quotes", force: :cascade do |t|
+    t.bigint "relation_id"
+    t.bigint "final_client_id"
+    t.string "references"
+    t.integer "state"
+    t.date "state_date"
+    t.index ["final_client_id"], name: "index_quotes_on_final_client_id"
+    t.index ["relation_id"], name: "index_quotes_on_relation_id"
   end
 
   create_table "relation_product_coefs", force: :cascade do |t|
@@ -75,6 +102,11 @@ ActiveRecord::Schema.define(version: 2019_06_27_144747) do
   end
 
   add_foreign_key "products", "third_parties"
+  add_foreign_key "properties", "products"
+  add_foreign_key "quote_products", "products"
+  add_foreign_key "quote_products", "quotes"
+  add_foreign_key "quotes", "relations"
+  add_foreign_key "quotes", "third_parties", column: "final_client_id"
   add_foreign_key "relation_product_coefs", "products"
   add_foreign_key "relation_product_coefs", "relations"
   add_foreign_key "relations", "third_parties", column: "client_id"

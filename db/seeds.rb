@@ -126,3 +126,17 @@ puts "---------Create ThirdParty & User End client 👤----------"
   )
   puts "[CREATE]".colorize(:green)
 end
+
+puts
+
+puts "---------Create Product 📦 ----------"
+
+name = "Skyner"
+print "#{name} "
+Product.create(
+  name: name,
+  third_party_id: nouvelEr.id,
+  category: 0,
+  basic_coef: 2.2
+)
+puts "[CREATE]".colorize(:green)
