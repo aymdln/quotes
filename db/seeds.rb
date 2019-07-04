@@ -132,11 +132,133 @@ puts
 puts "---------Create Product 📦 ----------"
 
 name = "Skyner"
-print "#{name} "
-Product.create(
+puts "==> #{name.colorize(:magenta)}"
+print "Product"
+product = Product.create(
   name: name,
   third_party_id: nouvelEr.id,
   category: 0,
   basic_coef: 2.2
 )
 puts "[CREATE]".colorize(:green)
+
+name = "barre"
+
+properties = [{
+  name: "barre",
+  ref: "K6103",
+  description: "Porteur",
+  value: 7000,
+  product_id: product.id,
+  price_cents: 65_45
+},
+{
+  name: "Joint porteur",
+  ref: "U612",
+  description: "Joint porteur",
+  value: 7000,
+  product_id: product.id,
+  price_cents: 33_79
+},
+{
+  name: "Serreur",
+  ref: "K6201",
+  description: "Serreur",
+  value: 6000,
+  product_id: product.id,
+  price_cents: 14_06
+},
+{
+  name: "Joint serreur",
+  ref: "U622",
+  description: "Joint serreur",
+  value: 250000,
+  product_id: product.id,
+  price_cents: 12_38
+},
+{
+  name: "Capots",
+  ref: "K6212",
+  description: "Capots",
+  value: 7000,
+  product_id: product.id,
+  price_cents: 15_63
+},
+{
+  name: "Joint rupture mousse",
+  ref: "H241",
+  description: "Joint mousse",
+  value: 6000,
+  product_id: product.id,
+  price_cents: 7_14
+},
+{
+  name: "Profil obturation",
+  ref: "T610",
+  description: "Profil lat 1",
+  value: 3500,
+  product_id: product.id,
+  price_cents: 6_70
+},
+{
+  name: "Profil obturation",
+  ref: "T612",
+  description: "Profil lat 2",
+  value: 3500,
+  product_id: product.id,
+  price_cents: 4_06
+},
+{
+  name: "Tole a commande",
+  ref: "",
+  description: "Toles",
+  value: 1000,
+  product_id: product.id,
+  price_cents: 14_00
+},
+{
+  name: "Connecteurs",
+  ref: "",
+  description: "",
+  value: 2,
+  product_id: product.id,
+  price_cents: 2_09
+},
+{
+  name: "Vis",
+  ref: "CBP1100",
+  description: "",
+  value: 100,
+  product_id: product.id,
+  price_cents: 25_00
+},
+{
+  name: "Vitrage",
+  ref: "",
+  description: "",
+  value: 0.000001,
+  product_id: product.id,
+  price_cents: 60_63
+},
+{
+  name: "Compribande",
+  ref: "",
+  description: "",
+  value: 1,
+  product_id: product.id,
+  price_cents: 22_50
+}]
+
+properties.each do |item|
+  puts item[:name]
+  print "-- #{item[:name].colorize(:blue)} "
+  Propertie.create(
+    name: item[:name],
+    ref: item[:ref],
+    description: item[:description],
+    value: item[:value],
+    product_id: item[:product_id],
+    price_cents: item[:price_cents]
+  )
+  puts "[CREATE]".colorize(:green)
+end
