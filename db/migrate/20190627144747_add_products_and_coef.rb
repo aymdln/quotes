@@ -6,7 +6,7 @@ class AddProductsAndCoef < ActiveRecord::Migration[5.2]
       t.float :basic_coef
     end
 
-    create_table :relation_product_coefs do |t|
+    create_table :relation_coefs do |t|
       t.references :relation, foreign_key: true
       t.references :product, foreign_key: true
       t.float :coef

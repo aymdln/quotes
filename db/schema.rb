@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_04_141845) do
+ActiveRecord::Schema.define(version: 2019_07_09_145941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,18 +46,19 @@ ActiveRecord::Schema.define(version: 2019_07_04_141845) do
     t.string "references"
     t.integer "state"
     t.date "state_date"
+    t.integer "price_cents", default: 0, null: false
     t.index ["final_client_id"], name: "index_quotes_on_final_client_id"
     t.index ["relation_id"], name: "index_quotes_on_relation_id"
   end
 
-  create_table "relation_product_coefs", force: :cascade do |t|
+  create_table "relation_coefs", force: :cascade do |t|
     t.bigint "relation_id"
     t.bigint "product_id"
     t.float "coef"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_relation_product_coefs_on_product_id"
-    t.index ["relation_id"], name: "index_relation_product_coefs_on_relation_id"
+    t.index ["product_id"], name: "index_relation_coefs_on_product_id"
+    t.index ["relation_id"], name: "index_relation_coefs_on_relation_id"
   end
 
   create_table "relations", force: :cascade do |t|
@@ -108,8 +109,8 @@ ActiveRecord::Schema.define(version: 2019_07_04_141845) do
   add_foreign_key "quote_products", "quotes"
   add_foreign_key "quotes", "relations"
   add_foreign_key "quotes", "third_parties", column: "final_client_id"
-  add_foreign_key "relation_product_coefs", "products"
-  add_foreign_key "relation_product_coefs", "relations"
+  add_foreign_key "relation_coefs", "products"
+  add_foreign_key "relation_coefs", "relations"
   add_foreign_key "relations", "third_parties", column: "client_id"
   add_foreign_key "relations", "third_parties", column: "manufacturer_id"
   add_foreign_key "users", "third_parties"
