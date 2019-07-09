@@ -284,5 +284,10 @@ relations.each do |relation|
       price: rand(100000..1000000),
       state_date: Time.now,
     )
+    QuoteProduct.create(
+      product_id: 1,
+      quote_id: quote.id
+    )
   end
 end
+
