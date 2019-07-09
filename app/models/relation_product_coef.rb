@@ -1,3 +1,0 @@
-class RelationProducCoef < ApplicationRecord
-
-end
