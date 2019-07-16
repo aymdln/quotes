@@ -68,6 +68,7 @@ gem 'money-rails'
 
 ###########Authentification#########
 gem 'devise'
+gem 'pundit'
 
 ###########For Seed################
 gem 'faker'

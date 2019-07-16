@@ -1,20 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-# puts "----------Clearing DB... 🧨 ----------"
-# print "==> #{ThirdParty.name.colorize(:magenta)}"
-# ThirdParty.destroy_all
-# puts ' [CLEAR]'.colorize(:green)
-# print "==> #{User.name.colorize(:magenta)}"
-# User.destroy_all
-# puts ' [CLEAR]'.colorize(:green)
-# puts "-------------------------------------"
-
 Faker::Config.locale = "fr"
 
 puts
@@ -23,7 +6,7 @@ puts
 puts "---------Create ThirdParty & User manufacturer 🏭 ---------"
 puts "==> #{"Nouvel Er".colorize(:magenta)} "
 print "ThirdParty ".colorize(:blue)
-nouvelEr = ThirdParty.create(
+nouvelEr = ThirdParty.create!(
   name: "Nouvel Er",
   address: "301 rue de lille",
   city: "Roncq",
@@ -40,9 +23,9 @@ nouvelEr = ThirdParty.create(
 puts "[CREATE]".colorize(:green)
 
 print "User ".colorize(:blue)
-User.create(
-  email: "#{Faker::Internet.username}@nouvel-er.com",
-  password: Faker::Internet.password,
+User.create!(
+  email: "test@nouvel-er.com",
+  password: "azerty",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   third_party_id: nouvelEr.id,
@@ -60,7 +43,7 @@ clients = Array.new
   puts "==> #{name.colorize(:magenta)}"
   print "ThirdParty "
   email = Faker::Internet.email
-  thirdParty = ThirdParty.create(
+  thirdParty = ThirdParty.create!(
     name: name,
     address: Faker::Address.street_address,
     city: Faker::Address.city,
@@ -76,7 +59,7 @@ clients = Array.new
   )
   puts "[CREATE]".colorize(:green)
   print "User "
-  User.create(
+  User.create!(
     email: email,
     password: Faker::Internet.password,
     first_name: Faker::Name.first_name,
@@ -85,7 +68,7 @@ clients = Array.new
   )
   puts "[CREATE]".colorize(:green)
   print "Relation "
-  relation = Relation.create(
+  relation = Relation.create!(
     manufacturer_id: nouvelEr.id,
     client_id: thirdParty.id,
   )
@@ -101,7 +84,7 @@ puts "---------Create ThirdParty & User End client 👤----------"
   puts "==> #{name.colorize(:magenta)}"
   print "ThirdParty "
   email = Faker::Internet.email
-  thirdParty = ThirdParty.create(
+  thirdParty = ThirdParty.create!(
     name: name,
     address: Faker::Address.street_address,
     city: Faker::Address.city,
@@ -117,9 +100,9 @@ puts "---------Create ThirdParty & User End client 👤----------"
   )
   puts "[CREATE]".colorize(:green)
   print "User "
-  User.create(
+  User.create!(
     email: email,
-    password: Faker::Internet.password,
+    password: "azerty",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     third_party_id: thirdParty.id,
@@ -134,7 +117,7 @@ puts "---------Create Products 📦 ----------"
 name = "Skyner"
 puts "==> #{name.colorize(:magenta)}"
 print "Product"
-product = Product.create(
+product = Product.create!(
   name: name,
   third_party_id: nouvelEr.id,
   category: 0,
@@ -249,7 +232,7 @@ properties = [{
 
 properties.each do |item|
   print "-- #{item[:name].colorize(:blue)} "
-  Propertie.create(
+  Propertie.create!(
     name: item[:name],
     ref: item[:ref],
     description: item[:description],
@@ -263,7 +246,7 @@ end
 relations = Relation.all
 relations.each do |relation|
   print "Relation Coef "
-  RelationCoef.create(
+  RelationCoef.create!(
     relation_id: relation.id,
     product_id: 1,
     coef: rand(1.0..2.0).round(2),
@@ -276,7 +259,7 @@ puts "-------Create Quotes 🧾---------"
 final_client = ThirdParty.where(third_party_type: :final_client)
 relations.each do |relation|
   5.times do
-    quote = Quote.create(
+    quote = Quote.create!(
       relation_id: relation.id,
       final_client_id: final_client.sample.id,
       references: Faker::Address.city,
@@ -284,7 +267,7 @@ relations.each do |relation|
       price: rand(100000..1000000),
       state_date: Time.now,
     )
-    QuoteProduct.create(
+    QuoteProduct.create!(
       product_id: 1,
       quote_id: quote.id
     )
