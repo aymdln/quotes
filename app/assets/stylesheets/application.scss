@@ -1,0 +1,15 @@
+// Graphical variables
+@import "config/colors";
+@import "config/fonts";
+
+// Your CSS partials
+@import "components/index";
+@import "pages/index";
+
+ h1 {
+   margin: 0;
+ }
+
+ body {
+   margin: 0;
+ }
