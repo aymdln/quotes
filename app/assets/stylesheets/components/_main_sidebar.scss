@@ -1,0 +1,24 @@
+.main-sidebar {
+  padding: 15px;
+  width: 200px;
+  background-color: $second-color;
+  color: $main-color;
+  .heading {
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba($main-color, 0.4);
+    h2 {
+      margin-bottom: 7px;
+    }
+  }
+  .container-link {
+    margin-top: 50px;
+    .link {
+      margin-bottom: 30px;
+      text-align: left;
+      i {
+        min-width: 17px;
+        margin-right: 20px;
+      }
+    }
+  }
+}

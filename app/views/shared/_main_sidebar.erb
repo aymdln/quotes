@@ -1,0 +1,16 @@
+<aside class="main-sidebar">
+	<div class="heading">
+		<h2><%= current_user.third_party.name %></h2>
+		<p><%= current_user.full_name %></p>
+	</div>
+	<div class="container-link">
+		<% @links.each do |link| %>
+			<a href="#">
+				<div class="link">
+					<i class="<%= link[:icon] %>"></i> <%= link[:name] %>
+				</div>
+			</a>
+		<% end %>
+		</a>
+	</div>
+</aside>

@@ -6,10 +6,21 @@
 @import "components/index";
 @import "pages/index";
 
- h1 {
+ h1, h2, p {
    margin: 0;
  }
 
+ a {
+   text-decoration: none;
+   color: $main-color;
+ }
+
+html {
+  height: 100%;
+}
+
  body {
+   height: 100%;
    margin: 0;
+   font-family: 'Roboto', sans-serif;
  }
