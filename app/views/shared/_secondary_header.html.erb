@@ -1,0 +1,11 @@
+<aside class="secondary-header">
+	<div class="menu">
+		<% @links.each do |link| %>
+			<a href="#">
+				<div class="link">
+					<i class="<%= link[:icon] %>"></i> <%= link[:name] %>
+				</div>
+			</a>
+		<% end %>
+	</div>
+</aside>
