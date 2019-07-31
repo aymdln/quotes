@@ -6,6 +6,12 @@ MoneyRails.configure do |config|
   #
   config.default_currency = :eur
 
+  Money.use_i18n = false
+
+
+  config.default_format = {
+    thousands_separator: " ",
+  }
   # Set default bank object
   #
   # Example:

@@ -1,6 +1,8 @@
 <%= render 'shared/main_header' %>
 <%= render 'shared/secondary_header' %>
 <div class="container">
-	<h1>Quotes#index</h1>
-	<p>Find me in app/views/quotes/index.html.erb</p>
+	<h1>Mes Clients</h1>
+	<div class="clients">
+		<%= render 'shared/table_quotes', quotes: @quotes %>
+	</div>
 </div>
