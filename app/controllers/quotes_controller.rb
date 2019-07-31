@@ -3,13 +3,17 @@ class QuotesController < ApplicationController
     links
     if current_user.third_party.manufacturer?
       relations = current_user.third_party.relations_as_manufacturer
+      @quotes = relations.map do |relation|
+        Quote.where(relation_id: relation.id, state: [1,2,3])
+      end
     else
       relations = current_user.third_party.relations_as_client
     end
-    @quotes = relations.map do |relation|
-      Quote.where(relation_id: relation.id)
-    end
     @quotes.flatten!
+  end
+
+  def show
+    links
   end
 
   private
@@ -24,7 +28,7 @@ class QuotesController < ApplicationController
       {
         name: "Devis",
         icon: "fa fa-file-alt",
-        path: "#",
+        path: quotes_path,
       },
       {
         name: "Réglages",

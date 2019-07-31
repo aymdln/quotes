@@ -9,9 +9,9 @@
 			<th>Dernière modification</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody class="body">
 		<% quotes.each do |quote| %>
-			<tr>
+			<tr data-link="<%= quote_path(quote) %>" class="row">
 				<td><%= quote.id %></td>
 				<td><%= quote.references %></td>
 				<% if current_user.third_party.manufacturer? %>
@@ -19,7 +19,7 @@
 				<% else %>
 					<td><%= quote.final_client.name %></td>
 				<% end %>
-				<td><%= quote.state %></td>
+				<td><span class="state <%= quote.state[:class] %>"><%= quote.state[:name] %></span></td>
 				<td><%= humanized_money(quote.price) %> <%= currency_symbol %></td>
 				<td><%= quote.state_date %></td>
 			</tr>
