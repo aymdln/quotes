@@ -1,2 +1,8 @@
-<h1>Clients#index</h1>
-<p>Find me in app/views/clients/index.html.erb</p>
+<%= render 'shared/main_header' %>
+<%= render 'shared/secondary_header' %>
+<div class="container">
+  <h1>Mes Clients</h1>
+  <div class="clients">
+    <%= render 'shared/table_clients', clients: @clients %>
+  </div>
+</div>

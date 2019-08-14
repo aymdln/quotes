@@ -22,4 +22,9 @@ class ApplicationController < ActionController::Base
       },
     ]
   end
+
+  def manufacturer?
+    current_user.third_party.manufacturer?
+  end
+  
 end

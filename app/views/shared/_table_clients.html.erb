@@ -1,0 +1,22 @@
+<table>
+	<thead class="head">
+		<tr>
+			<th>N° Client</th>
+			<th>Nom</th>
+			<th>Adress</th>
+		</tr>
+	</thead>
+	<tbody class="body">
+		<% clients.each do |client| %>
+			<tr data-link="<%= client_path(client) %>" class="row">
+				<td><%= client.id %></td>
+				<% if current_user.third_party.manufacturer? %>
+					<td><%= client.name %></td>
+				<% else %>
+					<td><%= client.final_client.name %></td>
+				<% end %>
+				<td><%= client.address %>, <%= client.zip %> <%= client.country %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

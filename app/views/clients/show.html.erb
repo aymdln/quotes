@@ -1,2 +1,11 @@
-<h1>Clients#show</h1>
-<p>Find me in app/views/clients/show.html.erb</p>
+<%= render 'shared/main_header' %>
+<%= render 'shared/secondary_header' %>
+<div class="container">
+	<h1><%= @client.name %></h1>
+	<div class="container">
+		<h2>Liste des devis</h2>
+		<div class="quotes-list">
+    <%= render 'shared/table_quotes', quotes: @quotes %>
+		</div>
+	</div>
+</div>
