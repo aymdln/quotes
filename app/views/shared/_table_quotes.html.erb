@@ -1,28 +1,35 @@
-<table>
-	<thead class="head">
-		<tr>
-			<th>N° Devis</th>
-			<th>Référence</th>
-			<th>Client</th>
-			<th>Statut</th>
-			<th>Prix</th>
-			<th>Dernière modification</th>
-		</tr>
-	</thead>
-	<tbody class="body">
-		<% quotes.each do |quote| %>
-			<tr data-link="<%= quote_path(quote) %>" class="row">
-				<td><%= quote.id %></td>
-				<td><%= quote.references %></td>
-				<% if current_user.third_party.manufacturer? %>
-					<td><%= quote.relation.client.name %></td>
-				<% else %>
-					<td><%= quote.final_client.name %></td>
+<div class="container grow-2">
+	<h2>Liste des devis</h2>
+	<div class="quotes-list box-shadow">
+		<table>
+			<thead class="head">
+				<tr>
+					<th>N° Devis</th>
+					<th>Référence</th>
+					<% unless no_col %>
+						<th>Client</th>
+					<% end %>
+					<th>Statut</th>
+					<th>Prix</th>
+				</tr>
+			</thead>
+			<tbody class="body">
+				<% quotes.each do |quote| %>
+					<tr data-link="<%= quote_path(quote) %>" class="row">
+						<td><%= quote.id %></td>
+						<td><%= quote.references %></td>
+						<% unless no_col %>
+							<% if current_user.third_party.manufacturer? %>
+								<td><%= quote.relation.client.name %></td>
+							<% else %>
+								<td><%= quote.final_client.name %></td>
+							<% end %>
+						<% end %>
+						<td><span class="state <%= quote.state[:class] %>"><%= quote.state[:name] %></span></td>
+						<td><%= humanized_money(quote.price) %> <%= currency_symbol %></td>
+					</tr>
 				<% end %>
-				<td><span class="state <%= quote.state[:class] %>"><%= quote.state[:name] %></span></td>
-				<td><%= humanized_money(quote.price) %> <%= currency_symbol %></td>
-				<td><%= quote.state_date %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+			</tbody>
+		</table>
+	</div>
+</div>

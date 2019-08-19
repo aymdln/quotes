@@ -1,1 +1,13 @@
 @import "quotes";
+
+.box-shadow {
+  box-shadow: 0 0 60px rgba(36,34,46,.1);
+}
+
+.flex {
+  display: flex;
+}
+
+.grow-2 {
+  flex-grow: 2;
+}

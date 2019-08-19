@@ -1,11 +1,9 @@
 <%= render 'shared/main_header' %>
 <%= render 'shared/secondary_header' %>
 <div class="container">
-	<h1><%= @client.name %></h1>
-	<div class="container">
-		<h2>Liste des devis</h2>
-		<div class="quotes-list">
-    <%= render 'shared/table_quotes', quotes: @quotes %>
-		</div>
+	<div class="container flex">
+  <%= render 'shared/info_card' %>
+		
+    <%= render 'shared/table_quotes', quotes: @quotes, no_col: true %>
 	</div>
 </div>
