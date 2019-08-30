@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "home#index"
 
-  resources :quotes, only: [:index, :show]
-  resources :clients, only: [:index, :show]
+  resources :quotes, only: [:index, :show, :new, :create]
+  resources :clients, only: [:index, :show, :new, :create]
 
 end

@@ -22,6 +22,16 @@ class ClientsController < ApplicationController
     end
   end
 
+  def new
+    links
+    @client = ThirdParty.new
+  end
+
+  def create
+    links
+  end
+  
+
   private
 
   def client_params

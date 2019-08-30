@@ -1,6 +1,13 @@
 .info-card {
   background-color: white;
   border-radius: 5px;
-  padding: 1em;
+  padding: 1.5em;
   border: 1px solid rgba(128, 128, 128, 0.2);
+  max-width: 300px;
+  .item {
+    margin-top: 1em;
+    i {
+      margin-right: 1em;
+    }
+  }
 }
