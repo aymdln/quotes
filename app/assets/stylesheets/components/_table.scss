@@ -20,7 +20,7 @@ table {
   td {
     text-align: center;
     padding: 1em 0;
-    border-bottom: 1px solid rgba(grey, 0.2);
+    border-top: 1px solid rgba(grey, 0.2);
     .state {
       padding: 4px 10px;
       border-radius: 7px;
@@ -41,5 +41,10 @@ table {
       background: rgba(#2626e8, 0.1);
       color: #2626e8;
     }
+  }
+  td#no-address {
+    font-style: italic;
+    opacity: 0.7;
+    border-top: 1px solid rgba(grey, 0.2);
   }
 }

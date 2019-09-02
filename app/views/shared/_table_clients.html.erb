@@ -1,7 +1,6 @@
 <table>
 	<thead class="head">
 		<tr>
-			<th>N° Client</th>
 			<th>Nom</th>
 			<th>Adress</th>
 		</tr>
@@ -9,13 +8,18 @@
 	<tbody class="body">
 		<% clients.each do |client| %>
 			<tr data-link="<%= client_path(client) %>" class="row">
-				<td><%= client.id %></td>
 				<% if current_user.third_party.manufacturer? %>
-					<td><%= client.name %></td>
+					<td id="name"><%= client.name.capitalize %></td>
 				<% else %>
-					<td><%= client.final_client.name %></td>
+					<td id="namerails "><%= client.final_client.name.capitalize %></td>
 				<% end %>
-				<td><%= client.address %>, <%= client.zip %> <%= client.country %></td>
+				<% if client.address == "" %>
+					<td id="no-address">
+						Pas d'adresse enregistrée
+					</td>
+				<% else %>
+					<td id="address"><%= client.address %>, <%= client.zip %> <%= client.city %></td>
+				<% end %>
 			</tr>
 		<% end %>
 	</tbody>

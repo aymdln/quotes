@@ -29,12 +29,29 @@ class ClientsController < ApplicationController
 
   def create
     links
+    @client = ThirdParty.new(client_params)
+    @client.third_party_type = 1
+    if @client.save(
+      name: @client.name,
+      address: @client.address,
+      city: @client.city,
+      zip: @client.zip,
+      country: @client.country,
+      email: @client.email,
+      phone: @client.phone,
+      siret: @client.siret,
+      siren: @client.siren,
+    )
+    relation = Relation.create(manufacturer_id: current_user.third_party.id, client_id: @client.id)
+      redirect_to clients_path
+    else
+      render :new
+    end
   end
-  
 
   private
 
   def client_params
-    params.require(:client).permit!
+    params.require(:third_party).permit!
   end
 end

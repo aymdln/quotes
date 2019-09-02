@@ -5,28 +5,45 @@
 	<%= simple_form_for @client, url: clients_path, class:"ui form" do |f| %>
 		<h3 class="ui dividing header">Nouveau Client</h3>
 		<div class="field">
-			<%= f.input :name, label: "Nom", placeholder:"Nom du client"%>
+			<%= f.input :name,
+			label: "Nom",
+			placeholder:"Nom du client"%>
 		</div>
 		<div class="field">
-			<%= f.input :address, label: "Adresse", placeholder:"N° et Rue" %>
+			<%= f.input :email, 
+			label: "Email", 
+			placeholder:"Email" %>
+		</div>
+		<div class="field">
+			<%= f.input :address, 
+			label: "Adresse", 
+			placeholder:"N° et Rue" %>
 		</div>
 		<div class="fields">
 			<div class="four wide field">
-				<%= f.input :zip, label: "Code postal", placeholder: "ex: 59166" %>
+				<%= f.input :zip, 
+				label: "Code postal", 
+				placeholder: "ex: 59166" %>
 			</div>
 			<div class="twelve wide field">
-				<%= f.input :city, label: "Ville", placeholder: "ex: Bousbecque" %>
+				<%= f.input :city, 
+				label: "Ville", 
+				placeholder: "ex: Bousbecque" %>
 			</div>
 		</div>
 		<div class="fields">
 			<div class="four wide field">
-				<%= f.input :phone, label:"Téléphone", placeholder: "ex: 0312345678" %>
+				<%= f.input :phone, 
+				label:"Téléphone", 
+				placeholder: "ex: 0312345678" %>
 			</div>
 			<div class="six wide field">
-				<%= f.input :siret, label:"Siret" %>
+				<%= f.input :siret, 
+				label:"Siret" %>
 			</div>
       <div class="six wide field">
-				<%= f.input :siren, label:"Siren" %>
+				<%= f.input :siren, 
+				label:"Siren" %>
 			</div>
 		</div>
 		<%= f.submit class: "ui button" %>

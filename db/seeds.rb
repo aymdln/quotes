@@ -264,7 +264,7 @@ relations.each do |relation|
       final_client_id: final_client.sample.id,
       references: Faker::Address.city,
       state: Quote.states.values.sample,
-      price: rand(100000..1000000),
+      price: rand(10000..100000),
       state_date: Time.now,
     )
     QuoteProduct.create!(
