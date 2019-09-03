@@ -16,6 +16,10 @@ table {
     background-color: grey;
     color: white;
     cursor: pointer;
+    a {
+      display: block;
+      color: white;
+    }
   }
   td {
     text-align: center;
@@ -42,9 +46,13 @@ table {
       color: #2626e8;
     }
   }
-  td#no-address {
+  a #no-address {
     font-style: italic;
     opacity: 0.7;
-    border-top: 1px solid rgba(grey, 0.2);
+    display: block;
+    &:hover {
+      color: white;
+      opacity: 1;
+    }
   }
 }

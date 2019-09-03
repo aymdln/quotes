@@ -9,16 +9,24 @@
 		<% clients.each do |client| %>
 			<tr data-link="<%= client_path(client) %>" class="row">
 				<% if current_user.third_party.manufacturer? %>
-					<td id="name"><%= client.name.capitalize %></td>
-				<% else %>
-					<td id="namerails "><%= client.final_client.name.capitalize %></td>
-				<% end %>
-				<% if client.address == "" %>
-					<td id="no-address">
-						Pas d'adresse enregistrée
+					<td id="name">
+						<%= link_to(client.name.capitalize, client_path(client)) %>
 					</td>
 				<% else %>
-					<td id="address"><%= client.address %>, <%= client.zip %> <%= client.city %></td>
+					<td id="name"><%= client.final_client.name.capitalize %></td>
+				<% end %>
+				<% if client.address == "" %>
+					<td>
+					<%= link_to(client_path(client)) do %>
+						<span id="no-address">Pas d'adresse enregistrée</span>
+						<% end %>
+					</td>
+				<% else %>
+					<td id="address">
+						<%= link_to(client_path(client)) do %>
+							<%= client.address %>, <%= client.zip %> <%= client.city %>
+						<% end %>
+					</td>
 				<% end %>
 			</tr>
 		<% end %>
