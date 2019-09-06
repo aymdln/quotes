@@ -21,38 +21,35 @@ table {
       color: white;
     }
   }
-  td {
-    text-align: center;
-    padding: 1em 0;
-    border-top: 1px solid rgba(grey, 0.2);
-    .state {
-      padding: 4px 10px;
-      border-radius: 7px;
-    }
-    .valid {
-      background-color: rgba(green, 0.1);
-      color: green;
-    }
-    .refuse {
-      background-color: rgba(#ca0000, 0.1);
-      color: #ca0000;
-    }
-    .progress {
-      background: rgba(orange, 0.1);
-      color: orange;
-    }
-    .draft {
-      background: rgba(#2626e8, 0.1);
-      color: #2626e8;
-    }
-  }
-  a #no-address {
-    font-style: italic;
-    opacity: 0.7;
-    display: block;
-    &:hover {
-      color: white;
-      opacity: 1;
+  tr {
+    td {
+      padding: 0;
+      text-align: center;
+      border-bottom: 1px solid rgba(grey, 0.2);
+      height: 4em;
+      .state {
+        padding: 4px 10px;
+        border-radius: 7px;
+      }
+      .valid {
+        background-color: rgba(green, 0.1);
+        color: green;
+      }
+      .refuse {
+        background-color: rgba(#ca0000, 0.1);
+        color: #ca0000;
+      }
+      .progress {
+        background: rgba(orange, 0.1);
+        color: orange;
+      }
+      .draft {
+        background: rgba(#2626e8, 0.1);
+        color: #2626e8;
+      }
+      a{
+        height: 100%;
+      }
     }
   }
 }

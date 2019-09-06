@@ -16,17 +16,33 @@
 			<tbody class="body">
 				<% quotes.each do |quote| %>
 					<tr data-link="<%= quote_path(quote) %>" class="row">
-						<td><%= quote.id %></td>
-						<td><%= quote.references %></td>
+						<td id="id">
+							<%= link_to(quote.id, quote_path(quote)) %>
+						</td>
+						<td id="ref">
+							<%= link_to(quote.references, quote_path(quote)) %>
+						</td>
 						<% unless no_col %>
 							<% if current_user.third_party.manufacturer? %>
-								<td><%= quote.relation.client.name %></td>
+								<td>
+									<%= link_to(quote.relation.client.name, quote_path(quote)) %>
+								</td>
 							<% else %>
-								<td><%= quote.final_client.name %></td>
+								<td>
+									<%= link_to(quote.final_client.name, quote_path(quote)) %>
+								</td>
 							<% end %>
 						<% end %>
-						<td><span class="state <%= quote.state[:class] %>"><%= quote.state[:name] %></span></td>
-						<td><%= humanized_money(quote.price) %> <%= currency_symbol %></td>
+						<td>
+							<%= link_to(quote_path(quote)) do %>
+								<span class="state <%= quote.state[:class] %>"><%= quote.state[:name] %></span>
+							<% end %>
+						</td>
+						<td>
+							<%= link_to(quote_path(quote)) do %>
+								<%= humanized_money(quote.price) %> <%= currency_symbol %>
+							<% end %>
+						</td>
 					</tr>
 				<% end %>
 			</tbody>
