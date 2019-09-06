@@ -73,6 +73,6 @@ gem 'pundit'
 
 ###########For Seed################
 gem 'faker'
-group :development do
-  gem 'colorize'
-end
+
+gem 'colorize'
+
