@@ -10,10 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_09_145941) do
+ActiveRecord::Schema.define(version: 2019_09_06_135941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "colors", force: :cascade do |t|
+    t.bigint "option_id"
+    t.string "name"
+    t.string "hexa"
+    t.integer "price_cents", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_colors_on_option_id"
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.bigint "product_id"
+    t.integer "option_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_options_on_product_id"
+  end
+
+  create_table "price_lists", force: :cascade do |t|
+    t.bigint "option_id"
+    t.integer "length_max"
+    t.integer "width_max"
+    t.integer "height_max"
+    t.integer "price_cents", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_price_lists_on_option_id"
+  end
 
   create_table "products", force: :cascade do |t|
     t.bigint "third_party_id"
@@ -23,19 +52,13 @@ ActiveRecord::Schema.define(version: 2019_07_09_145941) do
     t.index ["third_party_id"], name: "index_products_on_third_party_id"
   end
 
-  create_table "properties", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.float "value"
-    t.string "ref"
-    t.bigint "product_id"
-    t.integer "price_cents", default: 0, null: false
-    t.index ["product_id"], name: "index_properties_on_product_id"
-  end
-
   create_table "quote_products", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "quote_id"
+    t.bigint "color_id"
+    t.bigint "price_list_id"
+    t.index ["color_id"], name: "index_quote_products_on_color_id"
+    t.index ["price_list_id"], name: "index_quote_products_on_price_list_id"
     t.index ["product_id"], name: "index_quote_products_on_product_id"
     t.index ["quote_id"], name: "index_quote_products_on_quote_id"
   end
@@ -103,8 +126,12 @@ ActiveRecord::Schema.define(version: 2019_07_09_145941) do
     t.index ["third_party_id"], name: "index_users_on_third_party_id"
   end
 
+  add_foreign_key "colors", "options"
+  add_foreign_key "options", "products"
+  add_foreign_key "price_lists", "options"
   add_foreign_key "products", "third_parties"
-  add_foreign_key "properties", "products"
+  add_foreign_key "quote_products", "colors"
+  add_foreign_key "quote_products", "price_lists"
   add_foreign_key "quote_products", "products"
   add_foreign_key "quote_products", "quotes"
   add_foreign_key "quotes", "relations"
