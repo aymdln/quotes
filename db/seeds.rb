@@ -125,123 +125,213 @@ product = Product.create!(
 )
 puts "[CREATE]".colorize(:green)
 
-# properties = [{
-#   name: "barre",
-#   ref: "K6103",
-#   description: "Porteur",
-#   value: 7000,
-#   product_id: product.id,
-#   price_cents: 65_45,
-# },
-#               {
-#   name: "Joint porteur",
-#   ref: "U612",
-#   description: "Joint porteur",
-#   value: 7000,
-#   product_id: product.id,
-#   price_cents: 33_79,
-# },
-#               {
-#   name: "Serreur",
-#   ref: "K6201",
-#   description: "Serreur",
-#   value: 6000,
-#   product_id: product.id,
-#   price_cents: 14_06,
-# },
-#               {
-#   name: "Joint serreur",
-#   ref: "U622",
-#   description: "Joint serreur",
-#   value: 250000,
-#   product_id: product.id,
-#   price_cents: 12_38,
-# },
-#               {
-#   name: "Capots",
-#   ref: "K6212",
-#   description: "Capots",
-#   value: 7000,
-#   product_id: product.id,
-#   price_cents: 15_63,
-# },
-#               {
-#   name: "Joint rupture mousse",
-#   ref: "H241",
-#   description: "Joint mousse",
-#   value: 6000,
-#   product_id: product.id,
-#   price_cents: 7_14,
-# },
-#               {
-#   name: "Profil obturation",
-#   ref: "T610",
-#   description: "Profil lat 1",
-#   value: 3500,
-#   product_id: product.id,
-#   price_cents: 6_70,
-# },
-#               {
-#   name: "Profil obturation",
-#   ref: "T612",
-#   description: "Profil lat 2",
-#   value: 3500,
-#   product_id: product.id,
-#   price_cents: 4_06,
-# },
-#               {
-#   name: "Tole a commande",
-#   ref: "",
-#   description: "Toles",
-#   value: 1000,
-#   product_id: product.id,
-#   price_cents: 14_00,
-# },
-#               {
-#   name: "Connecteurs",
-#   ref: "",
-#   description: "",
-#   value: 2,
-#   product_id: product.id,
-#   price_cents: 2_09,
-# },
-#               {
-#   name: "Vis",
-#   ref: "CBP1100",
-#   description: "",
-#   value: 100,
-#   product_id: product.id,
-#   price_cents: 25_00,
-# },
-#               {
-#   name: "Vitrage",
-#   ref: "",
-#   description: "",
-#   value: 0.000001,
-#   product_id: product.id,
-#   price_cents: 60_63,
-# },
-#               {
-#   name: "Compribande",
-#   ref: "",
-#   description: "",
-#   value: 1,
-#   product_id: product.id,
-#   price_cents: 22_50,
-# }]
+puts "Options"
+options = [{
+  name: "Dimension",
+  product_id: product.id,
+  option_type: 0,
+  description: "Attention les dimensions sont en mm"
+}]
 
-# properties.each do |item|
-#   print "-- #{item[:name].colorize(:blue)} "
-#   Propertie.create!(
-#     name: item[:name],
-#     ref: item[:ref],
-#     description: item[:description],
-#     value: item[:value],
-#     product_id: item[:product_id],
-#     price_cents: item[:price_cents],
-#   )
-#   puts "[CREATE]".colorize(:green)
-# end
+3.times do |n|
+  options << {
+    name: "Color #{n + 1}",
+    product_id: product.id,
+    option_type: 1,
+    description: ""
+  } 
+end
+
+options.each do |option|
+  print ">> #{option[:name]} "
+  Option.create(
+    product_id: option[:product_id],
+    option_type: option[:option_type],
+    description: option[:description]
+  )
+  puts "[CREATE]".colorize(:green)
+end 
+
+price_lists = [{
+  dimension_1: 1000,
+  dimension_2: 1000,
+  price: 401.69
+},
+{
+  dimension_1: 1500,
+  dimension_2: 1000,
+  price: 474.01
+},
+{
+  dimension_1: 2000,
+  dimension_2: 1000,
+  price: 550.50
+},
+{
+  dimension_1: 2500,
+  dimension_2: 1000,
+  price: 627.00
+},
+{
+  dimension_1: 3000,
+  dimension_2: 1000,
+  price: 699.31
+},
+{
+  dimension_1: 3500,
+  dimension_2: 1000,
+  price: 797.00
+},
+{
+  dimension_1: 4000,
+  dimension_2: 1000,
+  price: 869.32
+},
+{
+  dimension_1: 4500,
+  dimension_2: 1000,
+  price: 1060.69
+},
+{
+  dimension_1: 5000,
+  dimension_2: 1000,
+  price: 1137.18
+},
+{
+  dimension_1: 1000,
+  dimension_2: 1500,
+  price: 446.01
+},
+{
+  dimension_1: 1500,
+  dimension_2: 1500,
+  price: 533.48
+},
+{
+  dimension_1: 2000,
+  dimension_2: 1500,
+  price: 646.33
+},
+{
+  dimension_1: 2500,
+  dimension_2: 1500,
+  price: 852.85
+},
+{
+  dimension_1: 3000,
+  dimension_2: 1500,
+  price: 940.33
+},
+{
+  dimension_1: 3500,
+  dimension_2: 1500,
+  price: 1031.98
+},
+{
+  dimension_1: 4000,
+  dimension_2: 1500,
+  price: 1119.45
+},
+{
+  dimension_1: 4500,
+  dimension_2: 1500,
+  price: 1211.10
+},
+{
+  dimension_1: 5000,
+  dimension_2: 1500,
+  price: 1336.33
+},
+{
+  dimension_1: 1000,
+  dimension_2: 2000,
+  price: 511.52
+},
+{
+  dimension_1: 1500,
+  dimension_2: 2000,
+  price: 614.15
+},
+{
+  dimension_1: 2000,
+  dimension_2: 2000,
+  price: 835.83
+},
+{
+  dimension_1: 2500,
+  dimension_2: 2000,
+  price: 942.64
+},
+{
+  dimension_1: 3000,
+  dimension_2: 2000,
+  price: 1045.27
+},
+{
+  dimension_1: 3500,
+  dimension_2: 2000,
+  price: 1173.28
+},
+{
+  dimension_1: 4000,
+  dimension_2: 2000,
+  price: 1275.91
+},
+{
+  dimension_1: 4500,
+  dimension_2: 2000,
+  price: 1509.97
+},
+{
+  dimension_1: 5000,
+  dimension_2: 2000,
+  price: 1616.78
+},
+{
+  dimension_1: 1000,
+  dimension_2: 2500,
+  price: 670.71
+},
+{
+  dimension_1: 1500,
+  dimension_2: 2500,
+  price: 788.49
+},
+{
+  dimension_1: 2000,
+  dimension_2: 2500,
+  price: 910.46
+},
+{
+  dimension_1: 2500,
+  dimension_2: 2500,
+  price: 1066.00
+},
+{
+  dimension_1: 3000,
+  dimension_2: 2500,
+  price: 1183.79
+},
+{
+  dimension_1: 3500,
+  dimension_2: 2500,
+  price: 1420.63
+},
+{
+  dimension_1: 4000,
+  dimension_2: 2500,
+  price: 1538.42
+},
+{
+  dimension_1: 4500,
+  dimension_2: 2500,
+  price: 1660.38
+},
+{
+  dimension_1: 5000,
+  dimension_2: 2500,
+  price: 1828.55
+}]
 
 relations = Relation.all
 relations.each do |relation|

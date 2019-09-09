@@ -25,9 +25,19 @@ ActiveRecord::Schema.define(version: 2019_09_06_135941) do
     t.index ["option_id"], name: "index_colors_on_option_id"
   end
 
+  create_table "dimension_names", force: :cascade do |t|
+    t.bigint "option_id"
+    t.string "dimension_1_name"
+    t.string "dimension_2_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_dimension_names_on_option_id"
+  end
+
   create_table "options", force: :cascade do |t|
     t.bigint "product_id"
     t.integer "option_type"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_options_on_product_id"
@@ -35,9 +45,8 @@ ActiveRecord::Schema.define(version: 2019_09_06_135941) do
 
   create_table "price_lists", force: :cascade do |t|
     t.bigint "option_id"
-    t.integer "length_max"
-    t.integer "width_max"
-    t.integer "height_max"
+    t.integer "dimension_1"
+    t.integer "dimension_2"
     t.integer "price_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -127,6 +136,7 @@ ActiveRecord::Schema.define(version: 2019_09_06_135941) do
   end
 
   add_foreign_key "colors", "options"
+  add_foreign_key "dimension_names", "options"
   add_foreign_key "options", "products"
   add_foreign_key "price_lists", "options"
   add_foreign_key "products", "third_parties"
