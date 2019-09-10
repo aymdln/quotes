@@ -142,16 +142,6 @@ options = [{
   } 
 end
 
-options.each do |option|
-  print ">> #{option[:name]} "
-  Option.create(
-    product_id: option[:product_id],
-    option_type: option[:option_type],
-    description: option[:description]
-  )
-  puts "[CREATE]".colorize(:green)
-end 
-
 price_lists = [{
   dimension_1: 1000,
   dimension_2: 1000,
@@ -333,6 +323,35 @@ price_lists = [{
   price: 1828.55
 }]
 
+colors = [{
+  
+}]
+
+options.each do |option|
+  print ">> #{option[:name]} "
+  option = Option.create(
+    product_id: option[:product_id],
+    option_type: option[:option_type],
+    description: option[:description]
+  )
+  if option.option_type == "dimension"
+    DimensionName.create(
+      dimension_1_name: "largeur",
+      dimension_2_name: "rampant",
+      option_id: option.id
+    )
+    price_lists.each do |price_list|
+      PriceList.create(
+        option_id: option.id,
+        dimension_1: price_list[:dimension_1],
+        dimension_2: price_list[:dimension_2],
+        price: price_list[:price]
+      )
+    end
+  else
+  end
+  puts "[CREATE]".colorize(:green)
+end 
 relations = Relation.all
 relations.each do |relation|
   print "Relation Coef "

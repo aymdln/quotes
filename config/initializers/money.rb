@@ -7,6 +7,7 @@ MoneyRails.configure do |config|
   config.default_currency = :eur
 
   Money.use_i18n = false
+  Money.locale_backend = nil
 
 
   config.default_format = {

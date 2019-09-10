@@ -1,0 +1,2 @@
+class DimensionName < ApplicationRecord
+end
