@@ -10,15 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_06_135941) do
+ActiveRecord::Schema.define(version: 2019_09_27_125942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "colors", force: :cascade do |t|
     t.bigint "option_id"
-    t.string "name"
-    t.string "hexa"
+    t.string "ral"
     t.integer "price_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,6 +31,15 @@ ActiveRecord::Schema.define(version: 2019_09_06_135941) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["option_id"], name: "index_dimension_names_on_option_id"
+  end
+
+  create_table "final_client_relations", force: :cascade do |t|
+    t.bigint "relation_id"
+    t.bigint "final_client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["final_client_id"], name: "index_final_client_relations_on_final_client_id"
+    t.index ["relation_id"], name: "index_final_client_relations_on_relation_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -64,6 +72,8 @@ ActiveRecord::Schema.define(version: 2019_09_06_135941) do
   create_table "quote_products", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "quote_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "color_id"
     t.bigint "price_list_id"
     t.index ["color_id"], name: "index_quote_products_on_color_id"
@@ -73,14 +83,14 @@ ActiveRecord::Schema.define(version: 2019_09_06_135941) do
   end
 
   create_table "quotes", force: :cascade do |t|
-    t.bigint "relation_id"
-    t.bigint "final_client_id"
     t.string "references"
     t.integer "state"
     t.date "state_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "price_cents", default: 0, null: false
-    t.index ["final_client_id"], name: "index_quotes_on_final_client_id"
-    t.index ["relation_id"], name: "index_quotes_on_relation_id"
+    t.bigint "final_client_relation_id"
+    t.index ["final_client_relation_id"], name: "index_quotes_on_final_client_relation_id"
   end
 
   create_table "relation_coefs", force: :cascade do |t|
@@ -135,8 +145,19 @@ ActiveRecord::Schema.define(version: 2019_09_06_135941) do
     t.index ["third_party_id"], name: "index_users_on_third_party_id"
   end
 
+  create_table "variables", force: :cascade do |t|
+    t.string "name"
+    t.string "token"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_variables_on_token", unique: true
+  end
+
   add_foreign_key "colors", "options"
   add_foreign_key "dimension_names", "options"
+  add_foreign_key "final_client_relations", "relations"
+  add_foreign_key "final_client_relations", "third_parties", column: "final_client_id"
   add_foreign_key "options", "products"
   add_foreign_key "price_lists", "options"
   add_foreign_key "products", "third_parties"
@@ -144,8 +165,7 @@ ActiveRecord::Schema.define(version: 2019_09_06_135941) do
   add_foreign_key "quote_products", "price_lists"
   add_foreign_key "quote_products", "products"
   add_foreign_key "quote_products", "quotes"
-  add_foreign_key "quotes", "relations"
-  add_foreign_key "quotes", "third_parties", column: "final_client_id"
+  add_foreign_key "quotes", "final_client_relations"
   add_foreign_key "relation_coefs", "products"
   add_foreign_key "relation_coefs", "relations"
   add_foreign_key "relations", "third_parties", column: "client_id"

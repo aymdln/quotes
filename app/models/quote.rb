@@ -3,8 +3,7 @@ class Quote < ApplicationRecord
     {name: "En cours", class: "progress"},
     {name: "Validé", class:"valid"},
     {name:"Refusé", class:"refuse"}]
-  belongs_to :relation
-  belongs_to :final_client, class_name: "ThirdParty"
+  belongs_to :final_client_relation
   has_many :quote_products
   monetize :price_cents
 end

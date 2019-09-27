@@ -3,6 +3,7 @@ class Relation < ApplicationRecord
   belongs_to :client, class_name: 'ThirdParty'
   has_many :quotes
   has_many :relation_coefs
+  has_many :final_client_relations
 
   validate :third_party_maker, :third_party_client
 

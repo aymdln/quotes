@@ -13,12 +13,13 @@ class ClientsController < ApplicationController
   def show
     links
     @client = ThirdParty.find(params[:id])
+    # raise
     if @client.manufacturer?
-      relation = @client.relations_as_manufacturer
-      @quotes = Quote.where(relation_id: relation.ids)
+      relation = @client.relations_as_manufacturer.first.final_client_relations
+      @quotes = Quote.where(final_client_relation_id: relation.ids)
     else
-      relation = @client.relations_as_client
-      @quotes = Quote.where(relation_id: relation.ids)
+      relation = @client.relations_as_client.first.final_client_relations
+      @quotes = Quote.where(final_client_relation_id: relation.ids)
     end
   end
 
