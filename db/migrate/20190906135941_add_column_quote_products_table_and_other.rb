@@ -19,9 +19,8 @@ class AddColumnQuoteProductsTableAndOther < ActiveRecord::Migration[5.2]
 
     create_table :option_dimensions do |t|
       t.references :option, foreign_key: true
-      t.string :dimension_1_name
-      t.string :dimension_2_name
-
+      t.string :name
+      
       t.timestamps
     end
 

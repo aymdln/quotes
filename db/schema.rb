@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_27_145928) do
+ActiveRecord::Schema.define(version: 2019_10_09_132507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,14 +55,11 @@ ActiveRecord::Schema.define(version: 2019_09_27_145928) do
 
   create_table "option_dimensions", force: :cascade do |t|
     t.bigint "option_id"
-    t.string "dimension_1_name"
-    t.string "dimension_2_name"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "dimension_1_id"
-    t.bigint "dimension_2_id"
-    t.index ["dimension_1_id"], name: "index_option_dimensions_on_dimension_1_id"
-    t.index ["dimension_2_id"], name: "index_option_dimensions_on_dimension_2_id"
+    t.bigint "dimension_id"
+    t.index ["dimension_id"], name: "index_option_dimensions_on_dimension_id"
     t.index ["option_id"], name: "index_option_dimensions_on_option_id"
   end
 
@@ -97,6 +94,7 @@ ActiveRecord::Schema.define(version: 2019_09_27_145928) do
     t.integer "category"
     t.float "basic_coef"
     t.string "name"
+    t.text "description"
     t.index ["third_party_id"], name: "index_products_on_third_party_id"
   end
 
@@ -105,17 +103,16 @@ ActiveRecord::Schema.define(version: 2019_09_27_145928) do
     t.string "ref"
     t.string "description"
     t.bigint "conso_id"
+    t.bigint "packing_id"
     t.bigint "quantity_id"
     t.bigint "order_id"
-    t.bigint "price_id"
-    t.bigint "total_price_id"
+    t.integer "price_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conso_id"], name: "index_properties_on_conso_id"
     t.index ["order_id"], name: "index_properties_on_order_id"
-    t.index ["price_id"], name: "index_properties_on_price_id"
+    t.index ["packing_id"], name: "index_properties_on_packing_id"
     t.index ["quantity_id"], name: "index_properties_on_quantity_id"
-    t.index ["total_price_id"], name: "index_properties_on_total_price_id"
   end
 
   create_table "quote_products", force: :cascade do |t|
@@ -159,6 +156,18 @@ ActiveRecord::Schema.define(version: 2019_09_27_145928) do
     t.index ["manufacturer_id"], name: "index_relations_on_manufacturer_id"
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.bigint "option_id"
+    t.integer "measure"
+    t.bigint "max_id"
+    t.bigint "calcul_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calcul_id"], name: "index_sections_on_calcul_id"
+    t.index ["max_id"], name: "index_sections_on_max_id"
+    t.index ["option_id"], name: "index_sections_on_option_id"
+  end
+
   create_table "third_parties", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -196,8 +205,10 @@ ActiveRecord::Schema.define(version: 2019_09_27_145928) do
     t.string "name"
     t.string "token"
     t.string "value"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_variables_on_product_id"
     t.index ["token"], name: "index_variables_on_token", unique: true
   end
 
@@ -210,17 +221,15 @@ ActiveRecord::Schema.define(version: 2019_09_27_145928) do
   add_foreign_key "option_colors", "options"
   add_foreign_key "option_colors", "variables", column: "increase_id"
   add_foreign_key "option_dimensions", "options"
-  add_foreign_key "option_dimensions", "variables", column: "dimension_1_id"
-  add_foreign_key "option_dimensions", "variables", column: "dimension_2_id"
+  add_foreign_key "option_dimensions", "variables", column: "dimension_id"
   add_foreign_key "option_glazings", "variables", column: "increase_id"
   add_foreign_key "option_results", "options"
   add_foreign_key "options", "products"
   add_foreign_key "products", "third_parties"
   add_foreign_key "properties", "variables", column: "conso_id"
   add_foreign_key "properties", "variables", column: "order_id"
-  add_foreign_key "properties", "variables", column: "price_id"
+  add_foreign_key "properties", "variables", column: "packing_id"
   add_foreign_key "properties", "variables", column: "quantity_id"
-  add_foreign_key "properties", "variables", column: "total_price_id"
   add_foreign_key "quote_products", "option_results"
   add_foreign_key "quote_products", "products"
   add_foreign_key "quote_products", "quotes"
@@ -229,5 +238,8 @@ ActiveRecord::Schema.define(version: 2019_09_27_145928) do
   add_foreign_key "relation_coefs", "relations"
   add_foreign_key "relations", "third_parties", column: "client_id"
   add_foreign_key "relations", "third_parties", column: "manufacturer_id"
+  add_foreign_key "sections", "options"
+  add_foreign_key "sections", "variables", column: "calcul_id"
+  add_foreign_key "sections", "variables", column: "max_id"
   add_foreign_key "users", "third_parties"
 end

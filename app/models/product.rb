@@ -5,6 +5,8 @@ class Product < ApplicationRecord
   belongs_to :third_party
   has_many :quote_produts
   has_many :relation_coefs
+  has_many :options
+  has_many :variables
   
   validate :third_party_maker
 
