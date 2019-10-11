@@ -45,7 +45,8 @@ ActiveRecord::Schema.define(version: 2019_10_09_132507) do
   create_table "option_colors", force: :cascade do |t|
     t.bigint "option_id"
     t.string "name"
-    t.string "ral"
+    t.integer "type_color"
+    t.string "value_color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "increase_id"
@@ -69,7 +70,9 @@ ActiveRecord::Schema.define(version: 2019_10_09_132507) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "increase_id"
+    t.bigint "option_id"
     t.index ["increase_id"], name: "index_option_glazings_on_increase_id"
+    t.index ["option_id"], name: "index_option_glazings_on_option_id"
   end
 
   create_table "option_results", force: :cascade do |t|
@@ -158,13 +161,14 @@ ActiveRecord::Schema.define(version: 2019_10_09_132507) do
 
   create_table "sections", force: :cascade do |t|
     t.bigint "option_id"
-    t.integer "measure"
+    t.bigint "option_dimension_id"
     t.bigint "max_id"
     t.bigint "calcul_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["calcul_id"], name: "index_sections_on_calcul_id"
     t.index ["max_id"], name: "index_sections_on_max_id"
+    t.index ["option_dimension_id"], name: "index_sections_on_option_dimension_id"
     t.index ["option_id"], name: "index_sections_on_option_id"
   end
 
@@ -222,6 +226,7 @@ ActiveRecord::Schema.define(version: 2019_10_09_132507) do
   add_foreign_key "option_colors", "variables", column: "increase_id"
   add_foreign_key "option_dimensions", "options"
   add_foreign_key "option_dimensions", "variables", column: "dimension_id"
+  add_foreign_key "option_glazings", "options"
   add_foreign_key "option_glazings", "variables", column: "increase_id"
   add_foreign_key "option_results", "options"
   add_foreign_key "options", "products"
@@ -238,6 +243,7 @@ ActiveRecord::Schema.define(version: 2019_10_09_132507) do
   add_foreign_key "relation_coefs", "relations"
   add_foreign_key "relations", "third_parties", column: "client_id"
   add_foreign_key "relations", "third_parties", column: "manufacturer_id"
+  add_foreign_key "sections", "option_dimensions"
   add_foreign_key "sections", "options"
   add_foreign_key "sections", "variables", column: "calcul_id"
   add_foreign_key "sections", "variables", column: "max_id"
