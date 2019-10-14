@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   def index
+    policy_scope(ThirdParty)
     links
     if manufacturer?
       relations = current_user.third_party.relations_as_manufacturer
@@ -13,6 +14,7 @@ class ClientsController < ApplicationController
   def show
     links
     @client = ThirdParty.find(params[:id])
+    authorize @client
     # raise
     if @client.manufacturer?
       relation = @client.relations_as_manufacturer.first.final_client_relations
