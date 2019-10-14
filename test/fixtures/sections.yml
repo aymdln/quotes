@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  option: one
+  measure: 1
+  variable: one
+  variable: one
+
+two:
+  option: two
+  measure: 1
+  variable: two
+  variable: two

@@ -9,34 +9,29 @@ class AddColumnQuoteProductsTableAndOther < ActiveRecord::Migration[5.2]
       t.timestamps
     end
     
-    create_table :colors do |t|
+    create_table :option_colors do |t|
       t.references :option, foreign_key: true
-      t.string :ral
-      t.monetize :price, currency: { present: false }
-    
-      t.timestamps
-    end
-    
-    create_table :price_lists do |t|
-      t.references :option, foreign_key: true
-      t.integer :dimension_1
-      t.integer :dimension_2
-      t.monetize :price, currency: { present: false }
+      t.string :name
+      t.integer :type_color
+      t.string :value_color
     
       t.timestamps
     end
 
-    create_table :dimension_names do |t|
+    create_table :option_dimensions do |t|
       t.references :option, foreign_key: true
-      t.string :dimension_1_name
-      t.string :dimension_2_name
+      t.string :name
+      
+      t.timestamps
+    end
 
+    create_table :option_glazings do |t|
+      t.string :name
+      t.text :description
+    
       t.timestamps
     end
     
-    
 
-    add_reference :quote_products, :color, foreign_key: true
-    add_reference :quote_products, :price_list, foreign_key: true
   end
 end

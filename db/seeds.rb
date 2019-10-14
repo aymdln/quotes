@@ -142,231 +142,231 @@ options = [{
   } 
 end
 
-price_lists = [{
-  dimension_1: 1000,
-  dimension_2: 1000,
-  price: 401.69
-},
-{
-  dimension_1: 1500,
-  dimension_2: 1000,
-  price: 474.01
-},
-{
-  dimension_1: 2000,
-  dimension_2: 1000,
-  price: 550.50
-},
-{
-  dimension_1: 2500,
-  dimension_2: 1000,
-  price: 627.00
-},
-{
-  dimension_1: 3000,
-  dimension_2: 1000,
-  price: 699.31
-},
-{
-  dimension_1: 3500,
-  dimension_2: 1000,
-  price: 797.00
-},
-{
-  dimension_1: 4000,
-  dimension_2: 1000,
-  price: 869.32
-},
-{
-  dimension_1: 4500,
-  dimension_2: 1000,
-  price: 1060.69
-},
-{
-  dimension_1: 5000,
-  dimension_2: 1000,
-  price: 1137.18
-},
-{
-  dimension_1: 1000,
-  dimension_2: 1500,
-  price: 446.01
-},
-{
-  dimension_1: 1500,
-  dimension_2: 1500,
-  price: 533.48
-},
-{
-  dimension_1: 2000,
-  dimension_2: 1500,
-  price: 646.33
-},
-{
-  dimension_1: 2500,
-  dimension_2: 1500,
-  price: 852.85
-},
-{
-  dimension_1: 3000,
-  dimension_2: 1500,
-  price: 940.33
-},
-{
-  dimension_1: 3500,
-  dimension_2: 1500,
-  price: 1031.98
-},
-{
-  dimension_1: 4000,
-  dimension_2: 1500,
-  price: 1119.45
-},
-{
-  dimension_1: 4500,
-  dimension_2: 1500,
-  price: 1211.10
-},
-{
-  dimension_1: 5000,
-  dimension_2: 1500,
-  price: 1336.33
-},
-{
-  dimension_1: 1000,
-  dimension_2: 2000,
-  price: 511.52
-},
-{
-  dimension_1: 1500,
-  dimension_2: 2000,
-  price: 614.15
-},
-{
-  dimension_1: 2000,
-  dimension_2: 2000,
-  price: 835.83
-},
-{
-  dimension_1: 2500,
-  dimension_2: 2000,
-  price: 942.64
-},
-{
-  dimension_1: 3000,
-  dimension_2: 2000,
-  price: 1045.27
-},
-{
-  dimension_1: 3500,
-  dimension_2: 2000,
-  price: 1173.28
-},
-{
-  dimension_1: 4000,
-  dimension_2: 2000,
-  price: 1275.91
-},
-{
-  dimension_1: 4500,
-  dimension_2: 2000,
-  price: 1509.97
-},
-{
-  dimension_1: 5000,
-  dimension_2: 2000,
-  price: 1616.78
-},
-{
-  dimension_1: 1000,
-  dimension_2: 2500,
-  price: 670.71
-},
-{
-  dimension_1: 1500,
-  dimension_2: 2500,
-  price: 788.49
-},
-{
-  dimension_1: 2000,
-  dimension_2: 2500,
-  price: 910.46
-},
-{
-  dimension_1: 2500,
-  dimension_2: 2500,
-  price: 1066.00
-},
-{
-  dimension_1: 3000,
-  dimension_2: 2500,
-  price: 1183.79
-},
-{
-  dimension_1: 3500,
-  dimension_2: 2500,
-  price: 1420.63
-},
-{
-  dimension_1: 4000,
-  dimension_2: 2500,
-  price: 1538.42
-},
-{
-  dimension_1: 4500,
-  dimension_2: 2500,
-  price: 1660.38
-},
-{
-  dimension_1: 5000,
-  dimension_2: 2500,
-  price: 1828.55
-}]
+# price_lists = [{
+#   dimension_1: 1000,
+#   dimension_2: 1000,
+#   price: 401.69
+# },
+# {
+#   dimension_1: 1500,
+#   dimension_2: 1000,
+#   price: 474.01
+# },
+# {
+#   dimension_1: 2000,
+#   dimension_2: 1000,
+#   price: 550.50
+# },
+# {
+#   dimension_1: 2500,
+#   dimension_2: 1000,
+#   price: 627.00
+# },
+# {
+#   dimension_1: 3000,
+#   dimension_2: 1000,
+#   price: 699.31
+# },
+# {
+#   dimension_1: 3500,
+#   dimension_2: 1000,
+#   price: 797.00
+# },
+# {
+#   dimension_1: 4000,
+#   dimension_2: 1000,
+#   price: 869.32
+# },
+# {
+#   dimension_1: 4500,
+#   dimension_2: 1000,
+#   price: 1060.69
+# },
+# {
+#   dimension_1: 5000,
+#   dimension_2: 1000,
+#   price: 1137.18
+# },
+# {
+#   dimension_1: 1000,
+#   dimension_2: 1500,
+#   price: 446.01
+# },
+# {
+#   dimension_1: 1500,
+#   dimension_2: 1500,
+#   price: 533.48
+# },
+# {
+#   dimension_1: 2000,
+#   dimension_2: 1500,
+#   price: 646.33
+# },
+# {
+#   dimension_1: 2500,
+#   dimension_2: 1500,
+#   price: 852.85
+# },
+# {
+#   dimension_1: 3000,
+#   dimension_2: 1500,
+#   price: 940.33
+# },
+# {
+#   dimension_1: 3500,
+#   dimension_2: 1500,
+#   price: 1031.98
+# },
+# {
+#   dimension_1: 4000,
+#   dimension_2: 1500,
+#   price: 1119.45
+# },
+# {
+#   dimension_1: 4500,
+#   dimension_2: 1500,
+#   price: 1211.10
+# },
+# {
+#   dimension_1: 5000,
+#   dimension_2: 1500,
+#   price: 1336.33
+# },
+# {
+#   dimension_1: 1000,
+#   dimension_2: 2000,
+#   price: 511.52
+# },
+# {
+#   dimension_1: 1500,
+#   dimension_2: 2000,
+#   price: 614.15
+# },
+# {
+#   dimension_1: 2000,
+#   dimension_2: 2000,
+#   price: 835.83
+# },
+# {
+#   dimension_1: 2500,
+#   dimension_2: 2000,
+#   price: 942.64
+# },
+# {
+#   dimension_1: 3000,
+#   dimension_2: 2000,
+#   price: 1045.27
+# },
+# {
+#   dimension_1: 3500,
+#   dimension_2: 2000,
+#   price: 1173.28
+# },
+# {
+#   dimension_1: 4000,
+#   dimension_2: 2000,
+#   price: 1275.91
+# },
+# {
+#   dimension_1: 4500,
+#   dimension_2: 2000,
+#   price: 1509.97
+# },
+# {
+#   dimension_1: 5000,
+#   dimension_2: 2000,
+#   price: 1616.78
+# },
+# {
+#   dimension_1: 1000,
+#   dimension_2: 2500,
+#   price: 670.71
+# },
+# {
+#   dimension_1: 1500,
+#   dimension_2: 2500,
+#   price: 788.49
+# },
+# {
+#   dimension_1: 2000,
+#   dimension_2: 2500,
+#   price: 910.46
+# },
+# {
+#   dimension_1: 2500,
+#   dimension_2: 2500,
+#   price: 1066.00
+# },
+# {
+#   dimension_1: 3000,
+#   dimension_2: 2500,
+#   price: 1183.79
+# },
+# {
+#   dimension_1: 3500,
+#   dimension_2: 2500,
+#   price: 1420.63
+# },
+# {
+#   dimension_1: 4000,
+#   dimension_2: 2500,
+#   price: 1538.42
+# },
+# {
+#   dimension_1: 4500,
+#   dimension_2: 2500,
+#   price: 1660.38
+# },
+# {
+#   dimension_1: 5000,
+#   dimension_2: 2500,
+#   price: 1828.55
+# }]
 
-colors = [{
-  ral: "9016",
-  price: 0
-},
-{
-  ral: "9005",
-  price: 0
-},
-{
-  ral: "7016",
-  price: 0
-}]
+# colors = [{
+#   ral: "9016",
+#   price: 0
+# },
+# {
+#   ral: "9005",
+#   price: 0
+# },
+# {
+#   ral: "7016",
+#   price: 0
+# }]
 
-options.each do |option|
-  print ">> #{option[:name]} "
-  option = Option.create(
-    product_id: option[:product_id],
-    option_type: option[:option_type],
-    description: option[:description]
-  )
-  if option.option_type == "dimension"
-    DimensionName.create(
-      dimension_1_name: "largeur",
-      dimension_2_name: "rampant",
-      option_id: option.id
-    )
-    price_lists.each do |price_list|
-      PriceList.create(
-        option_id: option.id,
-        dimension_1: price_list[:dimension_1],
-        dimension_2: price_list[:dimension_2],
-        price: price_list[:price]
-      )
-    end
-  else
-    color = colors.pop
-      Color.create(
-        option_id: option.id,
-        ral: color[:ral],
-        price: color[:price]
-      )
-  end
-  puts "[CREATE]".colorize(:green)
-end 
+# options.each do |option|
+#   print ">> #{option[:name]} "
+#   option = Option.create(
+#     product_id: option[:product_id],
+#     option_type: option[:option_type],
+#     description: option[:description]
+#   )
+#   if option.option_type == "dimension"
+#     DimensionName.create(
+#       dimension_1_name: "largeur",
+#       dimension_2_name: "rampant",
+#       option_id: option.id
+#     )
+#     price_lists.each do |price_list|
+#       PriceList.create(
+#         option_id: option.id,
+#         dimension_1: price_list[:dimension_1],
+#         dimension_2: price_list[:dimension_2],
+#         price: price_list[:price]
+#       )
+#     end
+#   else
+#     color = colors.pop
+#       Color.create(
+#         option_id: option.id,
+#         ral: color[:ral],
+#         price: color[:price]
+#       )
+#   end
+#   puts "[CREATE]".colorize(:green)
+# end 
 relations = Relation.all
 relations.each do |relation|
   print "Relation Coef "

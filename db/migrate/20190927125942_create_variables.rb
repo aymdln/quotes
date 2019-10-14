@@ -4,6 +4,7 @@ class CreateVariables < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :token
       t.string :value
+      t.references :product
 
       t.timestamps
     end
