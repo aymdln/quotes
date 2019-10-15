@@ -152,18 +152,19 @@ options = [{
   description: ""
 }]
 
-# options.each do |option|
-#   if option[:option_type] == 0 
-#     option = Option.create(
-#       product_id = option[:product_id],
-#       option_type = option[:option_type],
-#       description = option[:description]
-#     )
-#     OptionDimension.create(
+options.each do |option|
+  if option[:option_type] == 0 
+    option = Option.create(
+      product_id: option[:product_id],
+      option_type: option[:option_type],
+      description: option[:description],
+    )
+    OptionDimension.create(
+      value: ""
 
-#     )
-#   end
-# end
+    )
+  end
+end
 
 # price_lists = [{
 #   dimension_1: 1000,

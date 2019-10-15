@@ -10,8 +10,7 @@ class Variable < ApplicationRecord
   has_many :order, class_name: 'Property', foreign_key: 'order_id'
   has_many :increase, class_name: 'OptionColor', foreign_key: 'increase_id'
   has_many :increase, class_name: 'OptionGlazing', foreign_key: 'increase_id'
-  has_many :dimension_1, class_name: 'OptionDimension', foreign_key: 'dimension_1_id'
-  has_many :dimension_2, class_name: 'OptionDimension', foreign_key: 'dimension_2_id'
+  has_many :dimension, class_name: 'OptionDimension', foreign_key: 'dimension_id'
 
-  
+
 end
