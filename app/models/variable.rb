@@ -12,4 +12,6 @@ class Variable < ApplicationRecord
   has_many :increase, class_name: 'OptionGlazing', foreign_key: 'increase_id'
   has_many :dimension_1, class_name: 'OptionDimension', foreign_key: 'dimension_1_id'
   has_many :dimension_2, class_name: 'OptionDimension', foreign_key: 'dimension_2_id'
+
+  
 end

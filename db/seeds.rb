@@ -126,21 +126,44 @@ product = Product.create!(
 puts "[CREATE]".colorize(:green)
 
 puts "Options"
+
 options = [{
-  name: "Dimension",
-  product_id: product.id,
+  name: "dimensions",
+  product_id: 1,
   option_type: 0,
   description: "Attention les dimensions sont en mm"
+},
+{
+  name: "Vitrage",
+  product_id: 1,
+  option_type: 2,
+  description: ""
+},
+{
+  name: "Couleur",
+  product_id: 1,
+  option_type: 1,
+  description: ""
+},
+{
+  name: "Section",
+  product_id: 1,
+  option_type: 3,
+  description: ""
 }]
 
-3.times do |n|
-  options << {
-    name: "Color #{n + 1}",
-    product_id: product.id,
-    option_type: 1,
-    description: ""
-  } 
-end
+# options.each do |option|
+#   if option[:option_type] == 0 
+#     option = Option.create(
+#       product_id = option[:product_id],
+#       option_type = option[:option_type],
+#       description = option[:description]
+#     )
+#     OptionDimension.create(
+
+#     )
+#   end
+# end
 
 # price_lists = [{
 #   dimension_1: 1000,
@@ -404,12 +427,13 @@ relations.each do |relation|
 end
 
 
+
 # properties = [
 #   {
 #   name: "barre",
 #   ref: "K6103",
 #   description: "Porteur",
-#   value: 7000,
+#   packing: 7000,
 #   product_id: product.id,
 #   price_cents: 65_45,
 # },
