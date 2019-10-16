@@ -157,11 +157,12 @@ options.each do |option|
     option = Option.create(
       product_id: option[:product_id],
       option_type: option[:option_type],
-      description: option[:description],
+      description: option[:description]
     )
     OptionDimension.create(
+      name: "longeur",
+      option: option,
       value: ""
-
     )
   end
 end
