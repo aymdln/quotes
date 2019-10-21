@@ -6,23 +6,26 @@ class Section < ApplicationRecord
 
   belongs_to :option
   belongs_to :option_dimension
-  belongs_to :max, class_name: 'Variable'
-  belongs_to :calcul, class_name: 'Variable'
+  belongs_to :max, class_name: 'Variable', required: false
+  belongs_to :calcul, class_name: 'Variable', required: false
   
   private
   
   def create_variable
-    attributes = self.attributes
+    attributes = {
+      value_max: self.value_max,
+      value_calcul: self.value_calcul
+    }
     attributes.each do |key,value|
-      if key == :value_max || key == :value_calcul && value.nil? != true
+      if value.nil? == false
         variable = Variable.create(
           product_id: self.option.product_id,
-          name: "section_#{key.to_s}",
+          name: "section_#{key}",
           value: value
         )
       end
-      self.max = variable if key == :value_max
-      self.calcul = variable if key == :value_calcul
+      self.max_id = variable.id if key == :value_max
+      self.calcul_id = variable.id if key == :value_calcul
     end
   end
   

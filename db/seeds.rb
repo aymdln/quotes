@@ -174,18 +174,20 @@ options.each do |option|
     option_type: option[:option_type],
     description: option[:description],
   )
-  if option[:option_type] == 0
+  if option.option_type == "dimension"
     OptionDimension.create(
       name: "largeur",
       option: option,
       value: "",
     )
+    puts "LARGEUR"
     OptionDimension.create(
       name: "rampant",
       option: option,
       value: "",
     )
-  elsif option[:option_type] == 1
+    puts "RAMPANT"
+  elsif option.option_type == "color"
     option_colors.each do |color|
       OptionColor.create(
         name: color[:name],
@@ -195,19 +197,19 @@ options.each do |option|
         included: true,
       )
     end
-  elsif option[:option_type] == 2
+  elsif option.option_type == "glazing"
     OptionGlazing.create(
       name: "sunGlass",
       description: "Double vitrage clair avec intercalaire WE noir 6 rSun 71/38(#2)/16/ + 44.2",
       option: option,
       included: true
     )
-  elsif option[:option_type] == 3
+  elsif option.option_type == "section"
     largeur = OptionDimension.where(name: "largeur")[0]
     Section.create(
       option_dimension: largeur,
       option: option,
-      
+
     )
   end
 
