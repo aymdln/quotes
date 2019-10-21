@@ -7,5 +7,4 @@ class Option < ApplicationRecord
   has_many :option_results
   belongs_to :product
 
-
 end

@@ -131,40 +131,86 @@ options = [{
   name: "dimensions",
   product_id: 1,
   option_type: 0,
-  description: "Attention les dimensions sont en mm"
+  description: "Attention les dimensions sont en mm",
 },
-{
+           {
   name: "Vitrage",
   product_id: 1,
   option_type: 2,
-  description: ""
+  description: "",
 },
-{
+           {
   name: "Couleur",
   product_id: 1,
   option_type: 1,
-  description: ""
+  description: "",
 },
-{
+           {
   name: "Section",
   product_id: 1,
   option_type: 3,
-  description: ""
+  description: "",
+}]
+
+option_colors = [{
+  ral: "9016",
+  price: 0,
+  name: "blanc",
+},
+                 {
+  ral: "9005",
+  price: 0,
+  name: "noir",
+},
+                 {
+  ral: "7016",
+  price: 0,
+  name: "gris anthracite",
 }]
 
 options.each do |option|
-  if option[:option_type] == 0 
-    option = Option.create(
-      product_id: option[:product_id],
-      option_type: option[:option_type],
-      description: option[:description]
+  option = Option.create(
+    product_id: option[:product_id],
+    option_type: option[:option_type],
+    description: option[:description],
+  )
+  if option[:option_type] == 0
+    OptionDimension.create(
+      name: "largeur",
+      option: option,
+      value: "",
     )
     OptionDimension.create(
-      name: "longeur",
+      name: "rampant",
       option: option,
-      value: ""
+      value: "",
+    )
+  elsif option[:option_type] == 1
+    option_colors.each do |color|
+      OptionColor.create(
+        name: color[:name],
+        color_type: :ral,
+        option: option,
+        color_value: color[:ral],
+        included: true,
+      )
+    end
+  elsif option[:option_type] == 2
+    OptionGlazing.create(
+      name: "sunGlass",
+      description: "Double vitrage clair avec intercalaire WE noir 6 rSun 71/38(#2)/16/ + 44.2",
+      option: option,
+      included: true
+    )
+  elsif option[:option_type] == 3
+    largeur = OptionDimension.where(name: "largeur")[0]
+    Section.create(
+      option_dimension: largeur,
+      option: option,
+      
     )
   end
+
 end
 
 # price_lists = [{
@@ -348,19 +394,6 @@ end
 #   price: 1828.55
 # }]
 
-# colors = [{
-#   ral: "9016",
-#   price: 0
-# },
-# {
-#   ral: "9005",
-#   price: 0
-# },
-# {
-#   ral: "7016",
-#   price: 0
-# }]
-
 # options.each do |option|
 #   print ">> #{option[:name]} "
 #   option = Option.create(
@@ -391,7 +424,7 @@ end
 #       )
 #   end
 #   puts "[CREATE]".colorize(:green)
-# end 
+# end
 relations = Relation.all
 relations.each do |relation|
   print "Relation Coef "
@@ -412,7 +445,7 @@ relations.each do |relation|
     final_client = final_clients.shift
     final_client_relation = FinalClientRelation.create!(
       relation_id: relation.id,
-      final_client_id: final_client.id
+      final_client_id: final_client.id,
     )
     quote = Quote.create!(
       final_client_relation_id: final_client_relation.id,
@@ -423,12 +456,10 @@ relations.each do |relation|
     )
     QuoteProduct.create!(
       product_id: 1,
-      quote_id: quote.id
+      quote_id: quote.id,
     )
   end
 end
-
-
 
 # properties = [
 #   {

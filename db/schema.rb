@@ -45,13 +45,12 @@ ActiveRecord::Schema.define(version: 2019_10_15_100830) do
   create_table "option_colors", force: :cascade do |t|
     t.bigint "option_id"
     t.string "name"
-    t.integer "type_color"
-    t.string "value_color"
+    t.integer "color_type"
+    t.string "color_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "increase_id"
+    t.integer "increase"
     t.boolean "included"
-    t.index ["increase_id"], name: "index_option_colors_on_increase_id"
     t.index ["option_id"], name: "index_option_colors_on_option_id"
   end
 
@@ -70,10 +69,9 @@ ActiveRecord::Schema.define(version: 2019_10_15_100830) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "increase_id"
+    t.integer "increase"
     t.bigint "option_id"
     t.boolean "included"
-    t.index ["increase_id"], name: "index_option_glazings_on_increase_id"
     t.index ["option_id"], name: "index_option_glazings_on_option_id"
   end
 
@@ -225,11 +223,9 @@ ActiveRecord::Schema.define(version: 2019_10_15_100830) do
   add_foreign_key "glazing_propreties_dependants", "option_glazings"
   add_foreign_key "glazing_propreties_dependants", "properties"
   add_foreign_key "option_colors", "options"
-  add_foreign_key "option_colors", "variables", column: "increase_id"
   add_foreign_key "option_dimensions", "options"
   add_foreign_key "option_dimensions", "variables", column: "dimension_id"
   add_foreign_key "option_glazings", "options"
-  add_foreign_key "option_glazings", "variables", column: "increase_id"
   add_foreign_key "option_results", "options"
   add_foreign_key "options", "products"
   add_foreign_key "products", "third_parties"
