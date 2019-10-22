@@ -30,9 +30,11 @@ class Section < ApplicationRecord
   end
   
   def update_variable
-    variable = self.dimension
-    variable.name = self.name if variable.value != self.name && variable.name != nil
-    variable.value = self.value if variable.value != self.value && variable.value != nil
-    variable.save
+    variable_max = self.max
+    variable_calcul = self.calcul
+    variable_max.value = self.value_max if variable_max.value != self.value_max && variable_max.value != nil
+    variable_calcul.value = self.value_calcul if variable_calcul.value != self.value_calcul && variable_calcul.value != nil
+    variable_max.save
+    variable_calcul.save
   end
 end
