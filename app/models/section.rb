@@ -12,9 +12,10 @@ class Section < ApplicationRecord
   private
   
   def create_variable
+
     attributes = {
-      value_max: self.value_max,
-      value_calcul: self.value_calcul
+      value_max: self.value_max.nil? ? "" : self.value_max,
+      value_calcul: self.value_calcul.nil? ? "" : self.value_calcul
     }
     attributes.each do |key,value|
       if value.nil? == false

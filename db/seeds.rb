@@ -128,7 +128,7 @@ puts "[CREATE]".colorize(:green)
 puts "Options"
 
 options = [{
-  name: "dimensions",
+  name: "Dimensions",
   product_id: 1,
   option_type: 0,
   description: "Attention les dimensions sont en mm",
@@ -175,19 +175,22 @@ options.each do |option|
     description: option[:description],
   )
   if option.option_type == "dimension"
+    print "LARGEUR "
     OptionDimension.create(
       name: "largeur",
       option: option,
       value: "",
     )
-    puts "LARGEUR"
+    puts "[CREATE]".colorize(:green)
+    print "RAMPANT "
     OptionDimension.create(
       name: "rampant",
       option: option,
       value: "",
     )
-    puts "RAMPANT"
+    puts "[CREATE]".colorize(:green)
   elsif option.option_type == "color"
+    print "COLOR "
     option_colors.each do |color|
       OptionColor.create(
         name: color[:name],
@@ -197,20 +200,27 @@ options.each do |option|
         included: true,
       )
     end
+    puts "[CREATE]".colorize(:green)
   elsif option.option_type == "glazing"
+    print "GLAZING "
     OptionGlazing.create(
       name: "sunGlass",
       description: "Double vitrage clair avec intercalaire WE noir 6 rSun 71/38(#2)/16/ + 44.2",
       option: option,
       included: true
     )
+    puts "[CREATE]".colorize(:green)
   elsif option.option_type == "section"
+    print "SECTION "
     largeur = OptionDimension.where(name: "largeur")[0]
-    Section.create(
+    section = Section.create(
       option_dimension: largeur,
       option: option,
-
+      value_max: "700"
     )
+    section.value_calcul = "{{#{largeur.dimension.token}}}/{{#{section.max.token}}}"
+    section.save
+    puts "[CREATE]".colorize(:green)
   end
 
 end
