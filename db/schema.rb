@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_100830) do
     t.string "name"
     t.string "ref"
     t.string "description"
+    t.bigint "product_id"
     t.bigint "conso_id"
     t.bigint "packing_id"
     t.bigint "quantity_id"
@@ -115,6 +116,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_100830) do
     t.index ["conso_id"], name: "index_properties_on_conso_id"
     t.index ["order_id"], name: "index_properties_on_order_id"
     t.index ["packing_id"], name: "index_properties_on_packing_id"
+    t.index ["product_id"], name: "index_properties_on_product_id"
     t.index ["quantity_id"], name: "index_properties_on_quantity_id"
   end
 

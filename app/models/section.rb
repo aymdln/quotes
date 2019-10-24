@@ -9,6 +9,7 @@ class Section < ApplicationRecord
   belongs_to :max, class_name: 'Variable', required: false
   belongs_to :calcul, class_name: 'Variable', required: false
   
+  
   private
   
   def create_variable

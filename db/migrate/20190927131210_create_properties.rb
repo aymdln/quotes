@@ -4,6 +4,7 @@ class CreateProperties < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :ref
       t.string :description
+      t.references :product
       t.references :conso, foreign_key: { to_table: :variables }
       t.references :packing, foreign_key: { to_table: :variables }
       t.references :quantity, foreign_key: { to_table: :variables }
