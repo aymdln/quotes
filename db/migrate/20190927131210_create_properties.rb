@@ -7,8 +7,6 @@ class CreateProperties < ActiveRecord::Migration[5.2]
       t.references :product
       t.references :conso, foreign_key: { to_table: :variables }
       t.references :packing, foreign_key: { to_table: :variables }
-      t.references :quantity, foreign_key: { to_table: :variables }
-      t.references :order, foreign_key: { to_table: :variables }
       t.monetize :price, currency: { present: false }
 
       t.timestamps

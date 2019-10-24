@@ -108,16 +108,12 @@ ActiveRecord::Schema.define(version: 2019_10_15_100830) do
     t.bigint "product_id"
     t.bigint "conso_id"
     t.bigint "packing_id"
-    t.bigint "quantity_id"
-    t.bigint "order_id"
     t.integer "price_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conso_id"], name: "index_properties_on_conso_id"
-    t.index ["order_id"], name: "index_properties_on_order_id"
     t.index ["packing_id"], name: "index_properties_on_packing_id"
     t.index ["product_id"], name: "index_properties_on_product_id"
-    t.index ["quantity_id"], name: "index_properties_on_quantity_id"
   end
 
   create_table "quote_products", force: :cascade do |t|
@@ -232,9 +228,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_100830) do
   add_foreign_key "options", "products"
   add_foreign_key "products", "third_parties"
   add_foreign_key "properties", "variables", column: "conso_id"
-  add_foreign_key "properties", "variables", column: "order_id"
   add_foreign_key "properties", "variables", column: "packing_id"
-  add_foreign_key "properties", "variables", column: "quantity_id"
   add_foreign_key "quote_products", "option_results"
   add_foreign_key "quote_products", "products"
   add_foreign_key "quote_products", "quotes"
