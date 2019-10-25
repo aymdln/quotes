@@ -1,4 +1,6 @@
 class Variable < ApplicationRecord
+  attr_accessor :result
+
   has_secure_token
   belongs_to :product
 
