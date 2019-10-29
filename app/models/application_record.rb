@@ -5,8 +5,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def calcul_variable(options, variables_product)
     variables_ok = []
-    create_variables_array(options, variables_product)
-    byebug
+    variables = create_variables_array(options, variables_product)
     until variables.empty?
       variables.each do |variable|
         while value_variable?(variable)
@@ -25,6 +24,7 @@ class ApplicationRecord < ActiveRecord::Base
         break
       end
     end
+    variables_ok
   end
 
   private
@@ -32,18 +32,16 @@ class ApplicationRecord < ActiveRecord::Base
   def create_variables_array(options, variables_product)
     variables = []
     options.each do |option|
-      if option.option_type_before_type_cast == 0
-        option_dimensions = option.option_dimensions
-        option_dimensions.each do |option_dimension|
-          variables << option_dimension.dimension
-        end
-      end
+      variables << option
     end
-    byebug
     variables_product.each do |variable|
-      byebug
-      variables << variable if variables.include?(variable) == false
-      byebug
+      variable_data = {
+        name: variable.name,
+        token: variable.token,
+        value: variable.value,
+        result: ""
+      }
+      variables << variable_data if (options.select {|option| option[:token] == variable.token }).empty?
     end
     variables
   end

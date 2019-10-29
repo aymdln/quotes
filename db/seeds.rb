@@ -235,27 +235,35 @@ relations.each do |relation|
   puts "[CREATE]".colorize(:green)
 end
 
-section = product.options.where(option_type: 3).first.sections.first.calcul
+nombre_de_section = product.options.where(option_type: 3).first.sections.first.calcul
 largeur = OptionDimension.where(name:"largeur").first.dimension
 rampant = OptionDimension.where(name:"rampant").first.dimension
 
-longueur_des_porteurs = Variable.create(product_id: product.id, name:"longueur_des_porteurs", value: "{{#{rampant.token}}}+70")
-nombre_de_porteur = Variable.create(product_id: product.id, name:"nombre_de_porteur", value: "{{#{section.token}}}+1")
-longueur_profil = Variable.create(product_id: product.id, name:"longueur_profil", value: "{{#{longueur_des_porteurs.token}}}*{{#{nombre_de_porteur.token}}}")
+nombre_de_porteur = Variable.create(product_id: product.id, name:"nombre de porteur", value: "{{#{nombre_de_section.token}}}+1")
+longueur_un_porteur = Variable.create(product_id: product.id, name:"longueur un porteur", value: "{{#{rampant.token}}}-16")
+largeur_des_entretoises = Variable.create(product_id: product.id, name:"largeur des entretoises", value: "({{#{largeur.token}}}-({{#{nombre_de_porteur.token}}}*50))/{{#{nombre_de_section.token}}}")
+largeur_de_construction = Variable.create(product_id: product.id, name:"largeur de construction", value: "{{#{largeur.token}}}-10")
+largeur_entre_porteur = Variable.create(product_id: product.id, name:"largeur entre porteur", value: "({{#{largeur_des_entretoises.token}}}).ceil")
+largeur_vitrage = Variable.create(product_id: product.id, name:"largeur vitrage", value: "{{#{largeur_entre_porteur.token}}}+26")
+longueur_serreur = Variable.create(product_id: product.id, name:"longueur serreur", value: "{{#{rampant.token}}}+(63*2)+19")
+longueur_vitrage = Variable.create(product_id: product.id, name:"longueur vitrage", value: "{{#{longueur_serreur.token}}}-5")
+longueur_des_porteurs = Variable.create(product_id: product.id, name:"longueur des porteurs", value: "{{#{longueur_un_porteur.token}}}*{{#{nombre_de_section.token}}}")
+longueur_des_serreurs = Variable.create(product_id: product.id, name:"longueur des serreurs", value: "{{#{longueur_serreur.token}}}*{{#{nombre_de_section.token}}}")
+vitrage = Variable.create(product_id: product.id, name:"vitrage", value: "({{#{longueur_vitrage.token}}}*{{#{largeur_vitrage.token}}})*{{#{nombre_de_section.token}}}")
 
-barre = Property.create(name: "barre", product_id: product.id, value_conso: "{{#{longueur_profil.token}}}", value_packing: "7000.0", ref: "K6103", description: "Porteur", price_cents: 65_45)
-joint_porteur = Property.create(name: "joint porteur", product_id: product.id, value_conso: "{{#{longueur_profil.token}}}", value_packing: "12000.0", ref: "U612", description: "Joint porteur", price_cents: 33_79)
-serreur = Property.create(name: "serreur", product_id: product.id, value_conso: "{{#{longueur_profil.token}}}", value_packing: "6000.0", ref: "K6201", description: "Serreur", price_cents: 14_06)
-joint_serreur = Property.create(name: "joint serreur", product_id: product.id, value_conso: "{{#{serreur.conso.token}}}*2", value_packing: "25000.0", ref: "U622", description: "Joint serreur", price_cents: 12_38)
-capot = Property.create(name: "capot", product_id: product.id, value_conso: "{{#{longueur_profil.token}}}", value_packing: "7000", ref: "K6212", description: "Capots", price_cents: 15_63)
-joint_rupture_mousse = Property.create(name: "joint rupture mousse", product_id: product.id, value_conso: "{{#{longueur_profil.token}}}", value_packing: "6000", ref: "H241", description: "Joint mousse", price_cents: 7_14)
-profil_obturation = Property.create(name: "profil obturation", product_id: product.id, value_conso: "{{#{longueur_des_porteurs.token}}}", value_packing: "3500", ref: "T610", description: "Profil lat 1", price_cents: 6_70)
-profil_obturation_2 = Property.create(name: "profil obturation 2", product_id: product.id, value_conso: "{{#{longueur_des_porteurs.token}}}", value_packing: "3500", ref: "T612", description: "Profil lat 2", price_cents: 4_06)
+barre = Property.create(name: "barre", product_id: product.id, value_conso: "{{#{longueur_des_porteurs.token}}}", value_packing: "7000.0", ref: "K6103", description: "Porteur", price_cents: 65_45)
+joint_porteur = Property.create(name: "joint porteur", product_id: product.id, value_conso: "{{#{longueur_des_porteurs.token}}}", value_packing: "12000.0", ref: "U612", description: "Joint porteur", price_cents: 33_79)
+serreur = Property.create(name: "serreur", product_id: product.id, value_conso: "{{#{longueur_des_serreurs.token}}}", value_packing: "6000.0", ref: "K6201", description: "Serreur", price_cents: 14_06)
+joint_serreur = Property.create(name: "joint serreur", product_id: product.id, value_conso: "{{#{serreur.conso.token}}}*2+40", value_packing: "25000.0", ref: "U622", description: "Joint serreur", price_cents: 12_38)
+capot = Property.create(name: "capot", product_id: product.id, value_conso: "{{#{longueur_des_serreurs.token}}}", value_packing: "7000", ref: "K6212", description: "Capots", price_cents: 15_63)
+joint_rupture_mousse = Property.create(name: "joint rupture mousse", product_id: product.id, value_conso: "{{#{longueur_des_porteurs.token}}}", value_packing: "6000", ref: "H241", description: "Joint mousse", price_cents: 7_14)
+compensateur = Property.create(name: "compensateur", product_id: product.id, value_conso: "{{#{longueur_un_porteur.token}}}", value_packing: "3500", ref: "T610", description: "Profil lat 1", price_cents: 6_70)
+compensateur_2 = Property.create(name: "compensateur 2", product_id: product.id, value_conso: "{{#{longueur_un_porteur.token}}}", value_packing: "3500", ref: "T612", description: "Profil lat 2", price_cents: 4_06)
 tole_a_commande = Property.create(name: "tole a commande", product_id: product.id, value_conso: "({{#{largeur.token}}}*6)+({{#{rampant.token}}}*2)", value_packing: "1000", ref: "", description: "Toles", price_cents: 14_00)
-connecteur = Property.create(name: "connecteur", product_id: product.id, value_conso: "{{#{section.token}}}*2", value_packing: "1", ref: "", description: "", price_cents: 2_09)
-vis = Property.create(name: "vis", product_id: product.id, value_conso: "({{#{longueur_des_porteurs.token}}}*{{#{nombre_de_porteur.token}}}/200)", value_packing: "100", ref: "", description: "", price_cents: 25_00)
-vitrage = Property.create(name: "vitrage", product_id: product.id, value_conso: "({{#{largeur.token}}}*{{#{rampant.token}}})*0.000001", value_packing: "1", ref: "", description: "", price_cents: 60_63)
-compribande = Property.create(name: "compribande", product_id: product.id, value_conso: "1", value_packing: "1", ref: "", description: "", price_cents: 22_55)
+connecteur = Property.create(name: "connecteur", product_id: product.id, value_conso: "{{#{nombre_de_porteur.token}}}*2", value_packing: "1", ref: "", description: "", price_cents: 2_09)
+vis = Property.create(name: "vis", product_id: product.id, value_conso: "({{#{longueur_un_porteur.token}}}*{{#{nombre_de_porteur.token}}}/200)", value_packing: "100", ref: "", description: "", price_cents: 25_00)
+vitrage = Property.create(name: "vitrage", product_id: product.id, value_conso: "{{#{vitrage.token}}}*0.000001", value_packing: "1", ref: "", description: "", price_cents: 60_63)
+compribande = Property.create(name: "compribande", product_id: product.id, value_conso: "2", value_packing: "1", ref: "", description: "", price_cents: 22_55)
 
 puts "-------Create Quotes 🧾---------"
 
