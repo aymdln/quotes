@@ -30,21 +30,15 @@ class ApplicationRecord < ActiveRecord::Base
   def calcul_price(options, product_id)
     variables_product = Variable.where(product_id: product_id)
     variables_ok = calcul_variable(options, variables_product)
-    p variables_ok
     properties = Property.where(product_id: product_id)
     properties_data = []
     price_total = 0.0
     properties.each do |property|
       conso = (variables_ok.select { |variable| variable[:token] == property.conso.token }).first
       packing = (variables_ok.select { |variable| variable[:token] == property.packing.token }).first
-      p conso[:name]
-      p conso[:result]
-      p packing[:result]
       quantity = conso[:result].to_f/packing[:result].to_f
       quantity = quantity.ceil if property.order_exact_quantity == false
-      p quantity
       price = quantity*(property.price_cents*0.01)
-      p price
       price_total += price
     end
     price_total
