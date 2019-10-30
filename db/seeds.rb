@@ -144,12 +144,6 @@ options = [{
   product_id: 1,
   option_type: 1,
   description: "",
-},
-           {
-  name: "Section",
-  product_id: 1,
-  option_type: 3,
-  description: "",
 }]
 
 option_colors = [{
@@ -210,17 +204,17 @@ options.each do |option|
       included: true,
     )
     puts "[CREATE]".colorize(:green)
-  elsif option.option_type == "section"
-    print "SECTION "
-    largeur = OptionDimension.where(name: "largeur")[0]
-    section = Section.create(
-      option_dimension: largeur,
-      option: option,
-      value_max: "700.0",
-    )
-    section.value_calcul = "({{#{largeur.dimension.token}}}/{{#{section.max.token}}}).ceil"
-    section.save
-    puts "[CREATE]".colorize(:green)
+  # elsif option.option_type == "section"
+  #   print "SECTION "
+  #   largeur = OptionDimension.where(name: "largeur")[0]
+  #   section = Section.create(
+  #     option_dimension: largeur,
+  #     option: option,
+  #     value_max: "700.0",
+  #   )
+  #   section.value_calcul = "({{#{largeur.dimension.token}}}/{{#{section.max.token}}}).ceil"
+  #   section.save
+  #   puts "[CREATE]".colorize(:green)
   end
 end
 
@@ -235,9 +229,9 @@ relations.each do |relation|
   puts "[CREATE]".colorize(:green)
 end
 
-nombre_de_section = product.options.where(option_type: 3).first.sections.first.calcul
 largeur = OptionDimension.where(name:"largeur").first.dimension
 rampant = OptionDimension.where(name:"rampant").first.dimension
+nombre_de_section = product.options.where(option_type: 3).first.sections.first.calcul
 
 nombre_de_porteur = Variable.create(product_id: product.id, name:"nombre de porteur", value: "{{#{nombre_de_section.token}}}+1")
 longueur_un_porteur = Variable.create(product_id: product.id, name:"longueur un porteur", value: "{{#{rampant.token}}}-16")
@@ -260,10 +254,36 @@ joint_rupture_mousse = Property.create(name: "joint rupture mousse", product_id:
 compensateur = Property.create(name: "compensateur", product_id: product.id, value_conso: "{{#{longueur_un_porteur.token}}}", value_packing: "3500", ref: "T610", description: "Profil lat 1", price_cents: 6_70)
 compensateur_2 = Property.create(name: "compensateur 2", product_id: product.id, value_conso: "{{#{longueur_un_porteur.token}}}", value_packing: "3500", ref: "T612", description: "Profil lat 2", price_cents: 4_06)
 tole_a_commande = Property.create(name: "tole a commande", product_id: product.id, value_conso: "({{#{largeur.token}}}*6)+({{#{rampant.token}}}*2)", value_packing: "1000", ref: "", description: "Toles", price_cents: 14_00)
-connecteur = Property.create(name: "connecteur", product_id: product.id, value_conso: "{{#{nombre_de_porteur.token}}}*2", value_packing: "1", ref: "", description: "", price_cents: 2_09)
+connecteur = Property.create(name: "connecteur", product_id: product.id, value_conso: "{{#{nombre_de_porteur.token}}}*2", value_packing: "1", ref: "", description: "", price_cents: 2_09, order_exact_quantity: true)
 vis = Property.create(name: "vis", product_id: product.id, value_conso: "({{#{longueur_un_porteur.token}}}*{{#{nombre_de_porteur.token}}}/200)", value_packing: "100", ref: "", description: "", price_cents: 25_00)
-vitrage = Property.create(name: "vitrage", product_id: product.id, value_conso: "{{#{vitrage.token}}}*0.000001", value_packing: "1", ref: "", description: "", price_cents: 60_63)
+vitrage = Property.create(name: "vitrage", product_id: product.id, value_conso: "{{#{vitrage.token}}}*0.000001", value_packing: "1", ref: "", description: "", price_cents: 60_63, order_exact_quantity: true)
 compribande = Property.create(name: "compribande", product_id: product.id, value_conso: "2", value_packing: "1", ref: "", description: "", price_cents: 22_55)
+
+
+
+           {
+  name: "Section",
+  product_id: 1,
+  option_type: 3,
+  description: "",
+} 
+options.each do |option|
+    option = Option.create(
+      product_id: 1,
+      option_type: 3,
+      description: "",
+    )
+    largeur = OptionDimension.where(name: "largeur")[0]
+    section = Section.create(
+      option_dimension: largeur,
+      option: option,
+      value_max: "700.0",
+    )
+    section.value_calcul = "({{#{largeur_des_entretoises.token}}}/{{#{section.max.token}}}).ceil"
+    section.save
+    puts "[CREATE]".colorize(:green)
+end
+
 
 puts "-------Create Quotes 🧾---------"
 
