@@ -125,248 +125,99 @@ product = Product.create!(
 )
 puts "[CREATE]".colorize(:green)
 
-puts "Options"
+puts "==> #{"Options".colorize(:magenta)}"
+
 options = [{
-  name: "Dimension",
-  product_id: product.id,
+  name: "Dimensions",
+  product_id: 1,
   option_type: 0,
-  description: "Attention les dimensions sont en mm"
+  description: "Attention les dimensions sont en mm",
+},
+           {
+  name: "Vitrage",
+  product_id: 1,
+  option_type: 2,
+  description: "",
+},
+           {
+  name: "Couleur",
+  product_id: 1,
+  option_type: 1,
+  description: "",
 }]
 
-3.times do |n|
-  options << {
-    name: "Color #{n + 1}",
-    product_id: product.id,
-    option_type: 1,
-    description: ""
-  } 
+option_colors = [{
+  ral: "9016",
+  price: 0,
+  name: "blanc",
+},
+                 {
+  ral: "9005",
+  price: 0,
+  name: "noir",
+},
+                 {
+  ral: "7016",
+  price: 0,
+  name: "gris anthracite",
+}]
+
+options.each do |option|
+  option = Option.create(
+    product_id: option[:product_id],
+    option_type: option[:option_type],
+    description: option[:description],
+  )
+  if option.option_type == "dimension"
+    print "LARGEUR "
+    OptionDimension.create(
+      name: "largeur",
+      option: option,
+      value: "",
+    )
+    puts "[CREATE]".colorize(:green)
+    print "RAMPANT "
+    OptionDimension.create(
+      name: "rampant",
+      option: option,
+      value: "",
+    )
+    puts "[CREATE]".colorize(:green)
+  elsif option.option_type == "color"
+    print "COLOR "
+    option_colors.each do |color|
+      OptionColor.create(
+        name: color[:name],
+        color_type: :ral,
+        option: option,
+        color_value: color[:ral],
+        included: true,
+      )
+    end
+    puts "[CREATE]".colorize(:green)
+  elsif option.option_type == "glazing"
+    print "GLAZING "
+    OptionGlazing.create(
+      name: "sunGlass",
+      description: "Double vitrage clair avec intercalaire WE noir 6 rSun 71/38(#2)/16/ + 44.2",
+      option: option,
+      included: true,
+    )
+    puts "[CREATE]".colorize(:green)
+  # elsif option.option_type == "section"
+  #   print "SECTION "
+  #   largeur = OptionDimension.where(name: "largeur")[0]
+  #   section = Section.create(
+  #     option_dimension: largeur,
+  #     option: option,
+  #     value_max: "700.0",
+  #   )
+  #   section.value_calcul = "({{#{largeur.dimension.token}}}/{{#{section.max.token}}}).ceil"
+  #   section.save
+  #   puts "[CREATE]".colorize(:green)
+  end
 end
 
-# price_lists = [{
-#   dimension_1: 1000,
-#   dimension_2: 1000,
-#   price: 401.69
-# },
-# {
-#   dimension_1: 1500,
-#   dimension_2: 1000,
-#   price: 474.01
-# },
-# {
-#   dimension_1: 2000,
-#   dimension_2: 1000,
-#   price: 550.50
-# },
-# {
-#   dimension_1: 2500,
-#   dimension_2: 1000,
-#   price: 627.00
-# },
-# {
-#   dimension_1: 3000,
-#   dimension_2: 1000,
-#   price: 699.31
-# },
-# {
-#   dimension_1: 3500,
-#   dimension_2: 1000,
-#   price: 797.00
-# },
-# {
-#   dimension_1: 4000,
-#   dimension_2: 1000,
-#   price: 869.32
-# },
-# {
-#   dimension_1: 4500,
-#   dimension_2: 1000,
-#   price: 1060.69
-# },
-# {
-#   dimension_1: 5000,
-#   dimension_2: 1000,
-#   price: 1137.18
-# },
-# {
-#   dimension_1: 1000,
-#   dimension_2: 1500,
-#   price: 446.01
-# },
-# {
-#   dimension_1: 1500,
-#   dimension_2: 1500,
-#   price: 533.48
-# },
-# {
-#   dimension_1: 2000,
-#   dimension_2: 1500,
-#   price: 646.33
-# },
-# {
-#   dimension_1: 2500,
-#   dimension_2: 1500,
-#   price: 852.85
-# },
-# {
-#   dimension_1: 3000,
-#   dimension_2: 1500,
-#   price: 940.33
-# },
-# {
-#   dimension_1: 3500,
-#   dimension_2: 1500,
-#   price: 1031.98
-# },
-# {
-#   dimension_1: 4000,
-#   dimension_2: 1500,
-#   price: 1119.45
-# },
-# {
-#   dimension_1: 4500,
-#   dimension_2: 1500,
-#   price: 1211.10
-# },
-# {
-#   dimension_1: 5000,
-#   dimension_2: 1500,
-#   price: 1336.33
-# },
-# {
-#   dimension_1: 1000,
-#   dimension_2: 2000,
-#   price: 511.52
-# },
-# {
-#   dimension_1: 1500,
-#   dimension_2: 2000,
-#   price: 614.15
-# },
-# {
-#   dimension_1: 2000,
-#   dimension_2: 2000,
-#   price: 835.83
-# },
-# {
-#   dimension_1: 2500,
-#   dimension_2: 2000,
-#   price: 942.64
-# },
-# {
-#   dimension_1: 3000,
-#   dimension_2: 2000,
-#   price: 1045.27
-# },
-# {
-#   dimension_1: 3500,
-#   dimension_2: 2000,
-#   price: 1173.28
-# },
-# {
-#   dimension_1: 4000,
-#   dimension_2: 2000,
-#   price: 1275.91
-# },
-# {
-#   dimension_1: 4500,
-#   dimension_2: 2000,
-#   price: 1509.97
-# },
-# {
-#   dimension_1: 5000,
-#   dimension_2: 2000,
-#   price: 1616.78
-# },
-# {
-#   dimension_1: 1000,
-#   dimension_2: 2500,
-#   price: 670.71
-# },
-# {
-#   dimension_1: 1500,
-#   dimension_2: 2500,
-#   price: 788.49
-# },
-# {
-#   dimension_1: 2000,
-#   dimension_2: 2500,
-#   price: 910.46
-# },
-# {
-#   dimension_1: 2500,
-#   dimension_2: 2500,
-#   price: 1066.00
-# },
-# {
-#   dimension_1: 3000,
-#   dimension_2: 2500,
-#   price: 1183.79
-# },
-# {
-#   dimension_1: 3500,
-#   dimension_2: 2500,
-#   price: 1420.63
-# },
-# {
-#   dimension_1: 4000,
-#   dimension_2: 2500,
-#   price: 1538.42
-# },
-# {
-#   dimension_1: 4500,
-#   dimension_2: 2500,
-#   price: 1660.38
-# },
-# {
-#   dimension_1: 5000,
-#   dimension_2: 2500,
-#   price: 1828.55
-# }]
-
-# colors = [{
-#   ral: "9016",
-#   price: 0
-# },
-# {
-#   ral: "9005",
-#   price: 0
-# },
-# {
-#   ral: "7016",
-#   price: 0
-# }]
-
-# options.each do |option|
-#   print ">> #{option[:name]} "
-#   option = Option.create(
-#     product_id: option[:product_id],
-#     option_type: option[:option_type],
-#     description: option[:description]
-#   )
-#   if option.option_type == "dimension"
-#     DimensionName.create(
-#       dimension_1_name: "largeur",
-#       dimension_2_name: "rampant",
-#       option_id: option.id
-#     )
-#     price_lists.each do |price_list|
-#       PriceList.create(
-#         option_id: option.id,
-#         dimension_1: price_list[:dimension_1],
-#         dimension_2: price_list[:dimension_2],
-#         price: price_list[:price]
-#       )
-#     end
-#   else
-#     color = colors.pop
-#       Color.create(
-#         option_id: option.id,
-#         ral: color[:ral],
-#         price: color[:price]
-#       )
-#   end
-#   puts "[CREATE]".colorize(:green)
-# end 
 relations = Relation.all
 relations.each do |relation|
   print "Relation Coef "
@@ -378,6 +229,62 @@ relations.each do |relation|
   puts "[CREATE]".colorize(:green)
 end
 
+largeur = OptionDimension.where(name:"largeur").first.dimension
+rampant = OptionDimension.where(name:"rampant").first.dimension
+nombre_de_section = product.options.where(option_type: 3).first.sections.first.calcul
+
+nombre_de_porteur = Variable.create(product_id: product.id, name:"nombre de porteur", value: "{{#{nombre_de_section.token}}}+1")
+longueur_un_porteur = Variable.create(product_id: product.id, name:"longueur un porteur", value: "{{#{rampant.token}}}-16")
+largeur_des_entretoises = Variable.create(product_id: product.id, name:"largeur des entretoises", value: "({{#{largeur.token}}}-({{#{nombre_de_porteur.token}}}*50))/{{#{nombre_de_section.token}}}")
+largeur_de_construction = Variable.create(product_id: product.id, name:"largeur de construction", value: "{{#{largeur.token}}}-10")
+largeur_entre_porteur = Variable.create(product_id: product.id, name:"largeur entre porteur", value: "(({{#{largeur_de_construction.token}}}-({{#{nombre_de_porteur.token}}}*50))/{{#{nombre_de_section.token}}}).ceil")
+largeur_vitrage = Variable.create(product_id: product.id, name:"largeur vitrage", value: "{{#{largeur_entre_porteur.token}}}+26")
+longueur_serreur = Variable.create(product_id: product.id, name:"longueur serreur", value: "{{#{rampant.token}}}+(63*2)+19")
+longueur_vitrage = Variable.create(product_id: product.id, name:"longueur vitrage", value: "{{#{longueur_serreur.token}}}-5")
+longueur_des_porteurs = Variable.create(product_id: product.id, name:"longueur des porteurs", value: "{{#{longueur_un_porteur.token}}}*{{#{nombre_de_porteur.token}}}")
+longueur_des_serreurs = Variable.create(product_id: product.id, name:"longueur des serreurs", value: "{{#{longueur_serreur.token}}}*{{#{nombre_de_porteur.token}}}")
+vitrage = Variable.create(product_id: product.id, name:"vitrage", value: "({{#{longueur_vitrage.token}}}*{{#{largeur_vitrage.token}}})*{{#{nombre_de_section.token}}}")
+
+barre = Property.create(name: "barre", product_id: product.id, value_conso: "{{#{longueur_des_porteurs.token}}}", value_packing: "7000.0", ref: "K6103", description: "Porteur", price_cents: 65_45)
+joint_porteur = Property.create(name: "joint porteur", product_id: product.id, value_conso: "{{#{longueur_des_porteurs.token}}}", value_packing: "12000.0", ref: "U612", description: "Joint porteur", price_cents: 33_79)
+serreur = Property.create(name: "serreur", product_id: product.id, value_conso: "{{#{longueur_des_serreurs.token}}}", value_packing: "6000.0", ref: "K6201", description: "Serreur", price_cents: 14_06)
+joint_serreur = Property.create(name: "joint serreur", product_id: product.id, value_conso: "{{#{serreur.conso.token}}}*2+40", value_packing: "25000.0", ref: "U622", description: "Joint serreur", price_cents: 12_38)
+capot = Property.create(name: "capot", product_id: product.id, value_conso: "{{#{longueur_des_serreurs.token}}}", value_packing: "7000", ref: "K6212", description: "Capots", price_cents: 15_63)
+joint_rupture_mousse = Property.create(name: "joint rupture mousse", product_id: product.id, value_conso: "{{#{longueur_des_porteurs.token}}}", value_packing: "6000", ref: "H241", description: "Joint mousse", price_cents: 7_14)
+compensateur = Property.create(name: "compensateur", product_id: product.id, value_conso: "{{#{longueur_un_porteur.token}}}", value_packing: "3500", ref: "T610", description: "Profil lat 1", price_cents: 6_70)
+compensateur_2 = Property.create(name: "compensateur 2", product_id: product.id, value_conso: "{{#{longueur_un_porteur.token}}}", value_packing: "3500", ref: "T612", description: "Profil lat 2", price_cents: 4_06)
+tole_a_commande = Property.create(name: "tole a commande", product_id: product.id, value_conso: "({{#{largeur.token}}}*6)+({{#{rampant.token}}}*2)", value_packing: "1000", ref: "", description: "Toles", price_cents: 14_00)
+connecteur = Property.create(name: "connecteur", product_id: product.id, value_conso: "{{#{nombre_de_porteur.token}}}*2", value_packing: "1", ref: "", description: "", price_cents: 2_09, order_exact_quantity: true)
+vis = Property.create(name: "vis", product_id: product.id, value_conso: "({{#{longueur_un_porteur.token}}}*{{#{nombre_de_porteur.token}}}/200)", value_packing: "100", ref: "", description: "", price_cents: 25_00)
+vitrage = Property.create(name: "vitrage", product_id: product.id, value_conso: "{{#{vitrage.token}}}*0.000001", value_packing: "1", ref: "", description: "", price_cents: 60_63, order_exact_quantity: true)
+compribande = Property.create(name: "compribande", product_id: product.id, value_conso: "2", value_packing: "1", ref: "", description: "", price_cents: 22_55)
+
+
+
+           {
+  name: "Section",
+  product_id: 1,
+  option_type: 3,
+  description: "",
+} 
+options.each do |option|
+    option = Option.create(
+      product_id: 1,
+      option_type: 3,
+      description: "",
+    )
+    largeur = OptionDimension.where(name: "largeur")[0]
+    section = Section.create(
+      option_dimension: largeur,
+      option: option,
+      value_max: "700.0",
+    )
+    section.value_calcul = "({{#{largeur_des_entretoises.token}}}/{{#{section.max.token}}}).ceil"
+    section.save
+    puts "[CREATE]".colorize(:green)
+end
+
+
 puts "-------Create Quotes 🧾---------"
 
 final_clients = ThirdParty.where(third_party_type: :final_client).to_ary
@@ -387,7 +294,7 @@ relations.each do |relation|
     final_client = final_clients.shift
     final_client_relation = FinalClientRelation.create!(
       relation_id: relation.id,
-      final_client_id: final_client.id
+      final_client_id: final_client.id,
     )
     quote = Quote.create!(
       final_client_relation_id: final_client_relation.id,
@@ -398,117 +305,12 @@ relations.each do |relation|
     )
     QuoteProduct.create!(
       product_id: 1,
-      quote_id: quote.id
+      quote_id: quote.id,
     )
   end
 end
 
 
-# properties = [
-#   {
-#   name: "barre",
-#   ref: "K6103",
-#   description: "Porteur",
-#   value: 7000,
-#   product_id: product.id,
-#   price_cents: 65_45,
-# },
-#               {
-#   name: "Joint porteur",
-#   ref: "U612",
-#   description: "Joint porteur",
-#   value: 7000,
-#   product_id: product.id,
-#   price_cents: 33_79,
-# },
-#               {
-#   name: "Serreur",
-#   ref: "K6201",
-#   description: "Serreur",
-#   value: 6000,
-#   product_id: product.id,
-#   price_cents: 14_06,
-# },
-#               {
-#   name: "Joint serreur",
-#   ref: "U622",
-#   description: "Joint serreur",
-#   value: 250000,
-#   product_id: product.id,
-#   price_cents: 12_38,
-# },
-#               {
-#   name: "Capots",
-#   ref: "K6212",
-#   description: "Capots",
-#   value: 7000,
-#   product_id: product.id,
-#   price_cents: 15_63,
-# },
-#               {
-#   name: "Joint rupture mousse",
-#   ref: "H241",
-#   description: "Joint mousse",
-#   value: 6000,
-#   product_id: product.id,
-#   price_cents: 7_14,
-# },
-#               {
-#   name: "Profil obturation",
-#   ref: "T610",
-#   description: "Profil lat 1",
-#   value: 3500,
-#   product_id: product.id,
-#   price_cents: 6_70,
-# },
-#               {
-#   name: "Profil obturation",
-#   ref: "T612",
-#   description: "Profil lat 2",
-#   value: 3500,
-#   product_id: product.id,
-#   price_cents: 4_06,
-# },
-#               {
-#   name: "Tole a commande",
-#   ref: "",
-#   description: "Toles",
-#   value: 1000,
-#   product_id: product.id,
-#   price_cents: 14_00,
-# },
-#               {
-#   name: "Connecteurs",
-#   ref: "",
-#   description: "",
-#   value: 2,
-#   product_id: product.id,
-#   price_cents: 2_09,
-# },
-#               {
-#   name: "Vis",
-#   ref: "CBP1100",
-#   description: "",
-#   value: 100,
-#   product_id: product.id,
-#   price_cents: 25_00,
-# },
-#               {
-#   name: "Vitrage",
-#   ref: "",
-#   description: "",
-#   value: 0.000001,
-#   product_id: product.id,
-#   price_cents: 60_63,
-# },
-#               {
-#   name: "Compribande",
-#   ref: "",
-#   description: "",
-#   value: 1,
-#   product_id: product.id,
-#   price_cents: 22_50,
-# }]
 
 # properties.each do |item|
 #   print "-- #{item[:name].colorize(:blue)} "

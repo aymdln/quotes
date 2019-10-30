@@ -12,8 +12,8 @@ class AddColumnQuoteProductsTableAndOther < ActiveRecord::Migration[5.2]
     create_table :option_colors do |t|
       t.references :option, foreign_key: true
       t.string :name
-      t.integer :type_color
-      t.string :value_color
+      t.integer :color_type
+      t.string :color_value
     
       t.timestamps
     end

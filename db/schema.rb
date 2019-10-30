@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_09_132507) do
+ActiveRecord::Schema.define(version: 2019_10_30_114949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,12 +45,12 @@ ActiveRecord::Schema.define(version: 2019_10_09_132507) do
   create_table "option_colors", force: :cascade do |t|
     t.bigint "option_id"
     t.string "name"
-    t.integer "type_color"
-    t.string "value_color"
+    t.integer "color_type"
+    t.string "color_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "increase_id"
-    t.index ["increase_id"], name: "index_option_colors_on_increase_id"
+    t.integer "increase"
+    t.boolean "included"
     t.index ["option_id"], name: "index_option_colors_on_option_id"
   end
 
@@ -69,9 +69,9 @@ ActiveRecord::Schema.define(version: 2019_10_09_132507) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "increase_id"
+    t.integer "increase"
     t.bigint "option_id"
-    t.index ["increase_id"], name: "index_option_glazings_on_increase_id"
+    t.boolean "included"
     t.index ["option_id"], name: "index_option_glazings_on_option_id"
   end
 
@@ -105,17 +105,16 @@ ActiveRecord::Schema.define(version: 2019_10_09_132507) do
     t.string "name"
     t.string "ref"
     t.string "description"
+    t.bigint "product_id"
     t.bigint "conso_id"
     t.bigint "packing_id"
-    t.bigint "quantity_id"
-    t.bigint "order_id"
     t.integer "price_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "order_exact_quantity", default: false
     t.index ["conso_id"], name: "index_properties_on_conso_id"
-    t.index ["order_id"], name: "index_properties_on_order_id"
     t.index ["packing_id"], name: "index_properties_on_packing_id"
-    t.index ["quantity_id"], name: "index_properties_on_quantity_id"
+    t.index ["product_id"], name: "index_properties_on_product_id"
   end
 
   create_table "quote_products", force: :cascade do |t|
@@ -223,18 +222,14 @@ ActiveRecord::Schema.define(version: 2019_10_09_132507) do
   add_foreign_key "glazing_propreties_dependants", "option_glazings"
   add_foreign_key "glazing_propreties_dependants", "properties"
   add_foreign_key "option_colors", "options"
-  add_foreign_key "option_colors", "variables", column: "increase_id"
   add_foreign_key "option_dimensions", "options"
   add_foreign_key "option_dimensions", "variables", column: "dimension_id"
   add_foreign_key "option_glazings", "options"
-  add_foreign_key "option_glazings", "variables", column: "increase_id"
   add_foreign_key "option_results", "options"
   add_foreign_key "options", "products"
   add_foreign_key "products", "third_parties"
   add_foreign_key "properties", "variables", column: "conso_id"
-  add_foreign_key "properties", "variables", column: "order_id"
   add_foreign_key "properties", "variables", column: "packing_id"
-  add_foreign_key "properties", "variables", column: "quantity_id"
   add_foreign_key "quote_products", "option_results"
   add_foreign_key "quote_products", "products"
   add_foreign_key "quote_products", "quotes"

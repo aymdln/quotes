@@ -10,4 +10,5 @@ class Product < ApplicationRecord
   
   validate :third_party_maker
 
+  
 end
