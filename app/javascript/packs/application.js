@@ -1,4 +1,6 @@
 console.log('Hello World from Webpacker and test')
-// import { clickQuote } from './quotes.js';
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
 
-// clickQuote();
+// loads the Icon plugin
+UIkit.use(Icons);

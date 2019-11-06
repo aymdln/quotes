@@ -5,28 +5,3 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-
- h1, h2, h3, p {
-   margin: 0;
- }
-
- a {
-   text-decoration: none;
-   color: #636262;
- }
-
-html {
-  height: 100%;
-}
-
- body {
-   height: 100%;
-   margin: 0;
-   font-family: 'Roboto', sans-serif;
-   background-color: #F8F8F8;
-   color: #636262;
- }
-
- .container {
-   margin: 15px 3em;
- }

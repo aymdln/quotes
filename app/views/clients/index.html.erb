@@ -1,11 +1,1 @@
-<%= render 'shared/main_header' %>
-<%= render 'shared/secondary_header' %>
-<div class="container">
-	<div class="flex head-clients-list">
-		<h1>Mes Clients</h1>
-		<a class="btn btn-primary" href="/clients/new">New Client</a>
-	</div>
-	<div class="clients">
-		<%= render 'shared/table_clients', clients: @clients %>
-	</div>
-</div>
+<%= link_to('Logout', destroy_user_session_path, method: :delete) %> 
