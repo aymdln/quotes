@@ -1,0 +1,20 @@
+.state {
+  padding: 4px 10px;
+  border-radius: 7px;
+}
+.valid {
+  background-color: rgba(green, 0.1);
+  color: green;
+}
+.refuse {
+  background-color: rgba(#ca0000, 0.1);
+  color: #ca0000;
+}
+.progress {
+  background: rgba(orange, 0.1);
+  color: orange;
+}
+.draft {
+  background: rgba(#2626e8, 0.1);
+  color: #2626e8;
+}

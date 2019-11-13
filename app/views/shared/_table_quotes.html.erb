@@ -1,0 +1,51 @@
+<div class="uk-overflow-auto uk-box-shadow-medium uk-padding-small">
+	<table class="uk-table uk-table-middle uk-table-divider">
+		<thead>
+			<tr>
+				<th>N° devis</th>
+				<th>Référence</th>
+				<% unless current_page?(controller: 'clients', action: 'show') %>
+					<th>Client</th>
+				<% end %>
+				<th>Statut</th>
+				<th>Montant</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% quotes.each do |quote| %>
+				<tr>
+					<td class="uk-table-link">
+						<a class="uk-link-reset" href="<%= quote_path(quote) %>">
+							<%= quote.id %>
+						</a>
+					</td>
+					<td class="uk-table-link">
+						<a class="uk-link-reset" href="<%= quote_path(quote) %>">
+							<%= quote.references %>
+						</td>
+						<% unless current_page?(controller: 'clients', action: 'show') %>
+							<td class="uk-table-link">
+								<a class="uk-link-reset" href="<%= quote_path(quote) %>">
+									<% if current_user.third_party.manufacturer? %>
+										<%= quote.final_client_relation.relation.client.name %>
+									<% else %>
+										<%= quote.final_client_relation.final_client.name %>
+									<% end %>
+								</a>
+							</td>
+						<% end %>
+						<td class="uk-table-link">
+							<a class="uk-link-reset" href="<%= quote_path(quote) %>">
+								<span class="state <%= quote.status[:class] %>"><%= quote.status[:name] %></span>
+							</a>
+						</td>
+            <td class="uk-table-link">
+							<a class="uk-link-reset" href="<%= quote_path(quote) %>">
+								<%= humanized_money(quote.price) %> <%= currency_symbol %>
+							</a>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>

@@ -1,5 +1,5 @@
 class Quote < ApplicationRecord
-  enum state: [{name: "Brouillon", class:"draft"},
+  enum status: [{name: "Brouillon", class:"draft"},
     {name: "En cours", class: "progress"},
     {name: "Validé", class:"valid"},
     {name:"Refusé", class:"refuse"}]

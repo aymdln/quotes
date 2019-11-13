@@ -4,7 +4,7 @@ class QuotesController < ApplicationController
     if manufacturer?
       relations = current_user.third_party.relations_as_manufacturer
       @quotes = relations.map do |relation|
-        Quote.where(relation_id: relation.id, state: [1,2,3])
+        Quote.where(relation_id: relation.id, status: [1,2,3])
       end
     else
       relations = current_user.third_party.relations_as_client

@@ -15,7 +15,6 @@ class ClientsController < ApplicationController
     links
     @client = ThirdParty.find(params[:id])
     authorize @client
-    # raise
     if @client.manufacturer?
       relation = @client.relations_as_manufacturer.first.final_client_relations
       @quotes = Quote.where(final_client_relation_id: relation.ids)
@@ -23,8 +22,9 @@ class ClientsController < ApplicationController
       relation = @client.relations_as_client.first.final_client_relations
       @quotes = Quote.where(final_client_relation_id: relation.ids)
     end
+    # raise
   end
-
+  
   def new
     links
     @client = ThirdParty.new

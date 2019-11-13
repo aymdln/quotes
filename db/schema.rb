@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(version: 2019_10_30_114949) do
 
   create_table "quotes", force: :cascade do |t|
     t.string "references"
-    t.integer "state"
-    t.date "state_date"
+    t.integer "status"
+    t.date "status_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price_cents", default: 0, null: false

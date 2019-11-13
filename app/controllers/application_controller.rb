@@ -23,17 +23,17 @@ class ApplicationController < ActionController::Base
     @links = [
       {
         name: "Clients",
-        icon: "fa fa-user",
+        icon: "users",
         path: clients_path,
       },
       {
         name: "Devis",
-        icon: "fa fa-file-alt",
+        icon: "file-text",
         path: quotes_path,
       },
       {
         name: "Réglages",
-        icon: "fa fa-cog",
+        icon: "settings",
         path: "#",
       },
     ]
