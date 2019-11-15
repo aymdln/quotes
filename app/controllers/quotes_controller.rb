@@ -14,6 +14,7 @@ class QuotesController < ApplicationController
   def show
     links
     @quote = Quote.find(params[:id])
+    authorize @quote
   end
 
   private
