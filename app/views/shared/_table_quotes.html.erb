@@ -4,7 +4,7 @@
 			<tr>
 				<th>N° devis</th>
 				<th>Référence</th>
-				<% unless current_page?(controller: 'clients', action: 'show') %>
+				<% unless params[:controller] == 'clients' %>
 					<th>Client</th>
 				<% end %>
 				<th>Statut</th>
@@ -23,7 +23,7 @@
 						<a class="uk-link-reset" href="<%= quote_path(quote) %>">
 							<%= quote.references %>
 						</td>
-						<% unless current_page?(controller: 'clients', action: 'show') %>
+						<% unless params[:controller] == 'clients' %>
 							<td class="uk-table-link">
 								<a class="uk-link-reset" href="<%= quote_path(quote) %>">
 									<% if current_user.third_party.manufacturer? %>

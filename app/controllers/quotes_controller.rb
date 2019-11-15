@@ -1,15 +1,14 @@
 class QuotesController < ApplicationController
   def index
+    policy_scope(Quote)
     links
     if manufacturer?
       relations = current_user.third_party.relations_as_manufacturer
-      @quotes = relations.map do |relation|
-        Quote.where(relation_id: relation.id, status: [1,2,3])
-      end
+      final_client_relations = FinalClientRelation.where(relation: relations)
+      @quotes = Quote.where(final_client_relation: final_client_relations, status: [1,2,3]).order(:id)
     else
       relations = current_user.third_party.relations_as_client
     end
-    @quotes.flatten!
   end
 
   def show
