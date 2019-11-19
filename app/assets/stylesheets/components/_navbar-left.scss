@@ -1,13 +1,19 @@
 #navbar-left {
   color: white;
-  a,  p div {
+  a,
+  p div {
     color: white;
   }
   .divider {
     border-top: 1px solid rgba($color: white, $alpha: 0.2);
   }
-  #logout{
-    color: rgba($color: white, $alpha: 0.7) !important;
+  .bottom {
+    span {
+      color: rgba($color: white, $alpha: 0.7) !important;
+    }
+    .link {
+      color: rgba($color: white, $alpha: 0.7) !important;
+    }
   }
   .icon {
     width: 30px;

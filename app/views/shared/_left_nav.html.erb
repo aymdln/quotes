@@ -13,8 +13,8 @@
 			<% end %>
 		</ul>
 	</div>
-	<div>
+	<div class="bottom">
 		<hr class="divider">
-		<%= link_to('Deconnection', destroy_user_session_path, method: :delete, id:"logout") %>
+		<span><%= link_to("Réglage", "#", class: "link") %> - <%= link_to('Déconnection', destroy_user_session_path, method: :delete, class:"link") %></span>
 	</div>
 </div>
