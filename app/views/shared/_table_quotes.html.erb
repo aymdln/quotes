@@ -1,3 +1,4 @@
+	<h2 class="uk-heading-divider">Devis</h2>
 <div class="uk-overflow-auto uk-box-shadow-medium uk-padding-small">
 	<table class="uk-table uk-table-middle uk-table-divider">
 		<thead>
@@ -39,7 +40,7 @@
 								<span class="state <%= quote.status[:class] %>"><%= quote.status[:name] %></span>
 							</a>
 						</td>
-            <td class="uk-table-link">
+						<td class="uk-table-link">
 							<a class="uk-link-reset" href="<%= quote_path(quote) %>">
 								<%= humanized_money(quote.price) %> <%= currency_symbol %>
 							</a>

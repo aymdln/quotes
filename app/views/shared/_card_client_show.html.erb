@@ -1,11 +1,11 @@
 <div class="uk-card uk-card-default">
 	<div class="uk-card-header">
 		<div class="uk-grid-small uk-flex-middle" uk-grid>
-			<div class="uk-width-auto">
-				<img class="uk-border-circle" width="40" height="40" src="#">
-			</div>
 			<div class="uk-width-expand">
 				<h3 class="uk-card-title uk-margin-remove-bottom"><%= @client.name %></h3>
+			</div>
+			<div class="uk-width-auto">
+				<a href="<%= edit_client_path %>" class="uk-icon-link" uk-icon="file-edit"></a>
 			</div>
 		</div>
 	</div>
