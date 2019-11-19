@@ -31,12 +31,7 @@ class ApplicationController < ActionController::Base
         name: "Devis",
         icon: "file-text",
         path: quotes_path,
-      },
-      {
-        name: "Réglages",
-        icon: "settings",
-        path: "#",
-      },
+      }
     ]
   end
 
