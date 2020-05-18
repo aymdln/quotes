@@ -73,6 +73,7 @@ gem 'pundit'
 
 ###########For Seed################
 gem 'faker'
-
 gem 'colorize'
 
+###########Search###########
+# gem 'searchkick'

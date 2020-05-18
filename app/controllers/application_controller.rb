@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def name_third_party
-    @name_third_party = current_user.third_party.name
+    @name_third_party = current_user.third_party.name if current_user != nil
   end
   
 

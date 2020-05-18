@@ -6,6 +6,7 @@
 				<tr>
 					<th class="uk-width-small">Nom</th>
 					<th class="uk-width-small">Address</th>
+					<th class="uk-table-shrink"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -19,6 +20,9 @@
 							<%= client.address %><br />
 							<%= client.zip %> <%= client.city %>
 						</a>
+					</td>
+					<td class="uk-table-link">
+					<a href="<%= edit_client_path(client) %>" class="uk-icon-link" uk-icon="file-edit"></a>
 					</td>
 				</tr>
 			<% end %>
