@@ -1,6 +1,13 @@
-<header class="main-header">
-	<h2>QUOTE</h2>
-	<div class="user">
-		<p><%= current_user.full_name %></p>
+
+	<div class="main-header uk-padding-small uk-flex uk-flex-between">
+		<form class="uk-search uk-search-default">
+			<span uk-search-icon></span>
+			<input class="uk-search-input uk-border-rounded" type="search" placeholder="Search...">
+		</form>
+		<div class="profil uk-flex uk-flex-middle">
+			<p class="uk-margin-remove"><%= current_user.full_name %></p>
+			<img class="uk-border-circle uk-margin-small-left" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTkIur5lLwlDKV3qFfHOP89aeBVdTWwXwdEOOm-qVfH21A2Kp_&s" width="40px" height="40px">
+		</div>
 	</div>
-</header>
+	<hr class="uk-margin-remove-top uk-margin-small-bottom">
+

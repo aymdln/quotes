@@ -1,5 +1,6 @@
-<%= render 'shared/main_header' %>
-<%= render 'shared/secondary_header' %>
-<div class="container">
-  <h1>Devis n°<%= @quote.id %>: "<%= @quote.references %>"</h1>
+<div class="uk-padding-remove uk-margin-remove" uk-grid>
+	<%= render 'shared/left_nav' %>
+	<div uk-height-viewport="expand: true" class="uk-width-5-6 uk-padding-small uk-padding-remove-vertical">
+		<%= render 'shared/main_header' %>
+	</div>
 </div>

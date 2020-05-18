@@ -1,0 +1,19 @@
+<div class="uk-container uk-container-center uk-margin-remove-top">
+	<h3 class="uk-margin-top">Modifier <%= @client.name %></h3>
+	<ul class="uk-tab" data-uk-tab="{connect:'#my-id'}">
+		<li><a href="">Etablissement</a></li>
+		<li><a href="">Utilisateur(s)</a></li>
+	</ul>
+	<ul id="my-id" class="uk-switcher uk-margin">
+		<li><a href="#" id="autoplayer" data-uk-switcher-item="next"></a>
+			<%= render 'shared/form_edit_third_party' %>
+		</li>
+		<li>
+			<ul class="uk-list uk-list-striped">
+        <% @users.each do |user| %>
+          <li><%= user.full_name %>  <a href="<%= edit_user_path(user) %>" class="uk-icon-link" uk-icon="file-edit"></a></li>
+        <% end %>
+			</ul>
+		</li>
+	</ul>
+</div>

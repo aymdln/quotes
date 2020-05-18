@@ -1,0 +1,20 @@
+<div uk-height-viewport="expand: true" class="uk-flex uk-flex-column uk-flex-between uk-text-center uk-padding-small uk-width-1-6 background-gradient" id="navbar-left">
+	<div>
+		 <span class="uk-text-uppercase uk-text-bolder uk-text-large"><%= @name_third_party %></span> 
+		<hr class="divider">
+		<ul class="uk-nav-primary uk-nav-parent-icon uk-text-left" uk-nav>
+			<% @links.each do |link| %>
+				<li class="uk-active">
+					<a href="<%= link[:path] %>">
+						<span uk-icon="icon: <%= link[:icon] %>; ratio: 1.3"></span>
+						</i> <%= link[:name] %>
+					</a>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="bottom">
+		<hr class="divider">
+		<span><%= link_to("Réglage", "#", class: "link") %> - <%= link_to('Déconnection', destroy_user_session_path, method: :delete, class:"link") %></span>
+	</div>
+</div>

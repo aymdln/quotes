@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :name_third_party, :links
   include Pundit
 
   # Pundit: white-list approach.
@@ -23,21 +24,21 @@ class ApplicationController < ActionController::Base
     @links = [
       {
         name: "Clients",
-        icon: "fa fa-user",
+        icon: "users",
         path: clients_path,
       },
       {
         name: "Devis",
-        icon: "fa fa-file-alt",
+        icon: "file-text",
         path: quotes_path,
-      },
-      {
-        name: "Réglages",
-        icon: "fa fa-cog",
-        path: "#",
-      },
+      }
     ]
   end
+
+  def name_third_party
+    @name_third_party = current_user.third_party.name if current_user != nil
+  end
+  
 
   def manufacturer?
     current_user.third_party.manufacturer?

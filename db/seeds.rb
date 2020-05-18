@@ -279,9 +279,9 @@ relations.each do |relation|
     quote = Quote.create!(
       final_client_relation_id: final_client_relation.id,
       references: Faker::Address.city,
-      state: Quote.states.values.sample,
+      status: Quote.statuses.values.sample,
       price: rand(10000..100000),
-      state_date: Time.now,
+      status_date: Time.now,
     )
     QuoteProduct.create!(
       product_id: 1,

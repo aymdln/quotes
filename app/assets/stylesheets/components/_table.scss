@@ -1,55 +1,20 @@
-table {
-  border-spacing: 0;
-  background-color: white;
-  margin-top: 20px;
-  width: 100%;
-  border: 1px solid rgba(grey, 0.2);
-  border-radius: 5px;
-  padding: 1em;
-  .head {
-    th {
-      border-bottom: 2px solid rgba(grey, 0.2);
-      padding: 0;
-    }
-  }
-  .row:hover {
-    background-color: grey;
-    color: white;
-    cursor: pointer;
-    a {
-      display: block;
-      color: white;
-    }
-  }
-  tr {
-    td {
-      padding: 0;
-      text-align: center;
-      border-bottom: 1px solid rgba(grey, 0.2);
-      height: 4em;
-      .state {
-        padding: 4px 10px;
-        border-radius: 7px;
-      }
-      .valid {
-        background-color: rgba(green, 0.1);
-        color: green;
-      }
-      .refuse {
-        background-color: rgba(#ca0000, 0.1);
-        color: #ca0000;
-      }
-      .progress {
-        background: rgba(orange, 0.1);
-        color: orange;
-      }
-      .draft {
-        background: rgba(#2626e8, 0.1);
-        color: #2626e8;
-      }
-      a{
-        height: 100%;
-      }
-    }
-  }
+.state {
+  padding: 4px 10px;
+  border-radius: 7px;
+}
+.valid {
+  background-color: rgba(green, 0.1);
+  color: green;
+}
+.refuse {
+  background-color: rgba(#ca0000, 0.1);
+  color: #ca0000;
+}
+.progress {
+  background: rgba(orange, 0.1);
+  color: orange;
+}
+.draft {
+  background: rgba(#2626e8, 0.1);
+  color: #2626e8;
 }

@@ -1,34 +1,32 @@
-<table>
-	<thead class="head">
-		<tr>
-			<th>Nom</th>
-			<th>Adress</th>
-		</tr>
-	</thead>
-	<tbody class="body">
-		<% clients.each do |client| %>
-			<tr data-link="<%= client_path(client) %>" class="row">
-				<% if current_user.third_party.manufacturer? %>
-					<td id="name">
-						<%= link_to(client.name.capitalize, client_path(client)) %>
+<div class="uk-container">
+	<h2 class="uk-heading-divider">Clients</h2>
+	<div class="uk-overflow-auto uk-box-shadow-medium uk-padding-small">
+		<table class="uk-table uk-table-middle uk-table-divider">
+			<thead>
+				<tr>
+					<th class="uk-width-small">Nom</th>
+					<th class="uk-width-small">Address</th>
+					<th class="uk-table-shrink"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% clients.each do |client| %>
+					<tr>
+						<td class="uk-table-link">
+							<a class="uk-link-reset" href="<%= client_path(client) %>"><%= client.name.capitalize %></a>
+          </td>
+					<td class="uk-table-link">
+            <a class="uk-link-reset" href="<%= client_path(client) %>">
+							<%= client.address %><br />
+							<%= client.zip %> <%= client.city %>
+						</a>
 					</td>
-				<% else %>
-					<td id="name"><%= client.final_client.name.capitalize %></td>
-				<% end %>
-				<% if client.address == "" %>
-					<td>
-					<%= link_to(client_path(client)) do %>
-						<span id="no-address">Pas d'adresse enregistrée</span>
-						<% end %>
+					<td class="uk-table-link">
+					<a href="<%= edit_client_path(client) %>" class="uk-icon-link" uk-icon="file-edit"></a>
 					</td>
-				<% else %>
-					<td id="address">
-						<%= link_to(client_path(client)) do %>
-							<%= client.address %>, <%= client.zip %> <%= client.city %>
-						<% end %>
-					</td>
-				<% end %>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+</div>
